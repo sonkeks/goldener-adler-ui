@@ -5,17 +5,15 @@ import {Footer} from "@/components/Footer.tsx";
 
 function Layout() {
   return (
+    <>
+      <Header />
     <div className="flex flex-col h-dvh">
-      <div id="header" className="sticky top-0 bg-background">
-        <Header />
-      </div>
       <div id="content" className="flex-1 w-full">
         <Outlet />
       </div>
-      <div id="footer">
-        <Footer />
-      </div>
+      <Footer />
     </div>
+    </>
   )
 }
 
