@@ -1,5 +1,6 @@
 import {useEffect, useState, type FunctionComponent} from "react";
 import {Button} from "@/components/ui/button.tsx";
+import {useNavigate} from "react-router";
 
 type MenuItem = {
   label: string,
@@ -9,7 +10,7 @@ type MenuItem = {
 const MENU_ITEMS: MenuItem[] = [
   {
     label: "Start",
-    path: "/start",
+    path: "/",
   },
   {
     label: "Rooms",
@@ -27,6 +28,7 @@ const MENU_ITEMS: MenuItem[] = [
 
 export const Header: FunctionComponent = () => {
   const [isTop, setIsTop] = useState(true);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -41,10 +43,10 @@ export const Header: FunctionComponent = () => {
   
   return (
     <div id="header-container" className={`fixed w-full top-0 z-50 transition-colors ${isTop ? "bg-transparent" : "bg-background shadow-md"}`}>
-      <menu className="pr-2 py-3 max-w-6xl m-auto flex gap-3 items-center">
+      <menu className="pr-5 pl-2 py-3 max-w-6xl m-auto flex gap-3 items-center">
         {MENU_ITEMS.map(menuItem => (
           <li>
-            <Button size="sm" className={`text-md ${isTop ? "text-background" : ""}`} variant="link">{menuItem.label}</Button>
+            <Button onClick={() => navigate(menuItem.path)} size="sm" className={`text-md ${isTop ? "text-background" : ""}`} variant="link">{menuItem.label}</Button>
           </li>
         ))}
         <div className="flex-1"></div>
