@@ -3,12 +3,13 @@ import { PiArrowDown } from 'react-icons/pi';
 
 interface HeroProps extends PropsWithChildren {
   image: string,
+  height?: string,
   arrow?: boolean,
 }
 
-export const Hero: FunctionComponent<HeroProps> = ({children, image, arrow}: HeroProps) => {
+export const Hero: FunctionComponent<HeroProps> = ({children, image, height, arrow}: HeroProps) => {
   return (
-    <div className="relative h-screen w-screen">
+    <div style={{height: height ?? '100vh'}} className="relative w-screen">
       <img className="absolute inset-0 h-full w-full object-cover" src={image} alt="header image"/>
       <div id="overlay" className="absolute inset-0 h-full w-full bg-slate-800 opacity-40"></div>
       <div className="relative z-10 flex items-center justify-center h-full">

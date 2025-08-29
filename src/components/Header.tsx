@@ -44,8 +44,8 @@ export const Header: FunctionComponent = () => {
   return (
     <div id="header-container" className={`fixed w-full top-0 z-50 transition-colors ${isTop ? "bg-transparent" : "bg-background shadow-md"}`}>
       <menu className="pr-5 pl-2 py-3 max-w-6xl m-auto flex gap-3 items-center">
-        {MENU_ITEMS.map(menuItem => (
-          <li>
+        {MENU_ITEMS.map((menuItem, index) => (
+          <li key={index}>
             <Button onClick={() => navigate(menuItem.path)} size="sm" className={`text-md ${isTop ? "text-background" : ""}`} variant="link">{menuItem.label}</Button>
           </li>
         ))}
