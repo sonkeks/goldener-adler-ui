@@ -1,7 +1,7 @@
 import type {FunctionComponent} from "react";
 import {Content} from "@/components/Content.tsx";
 import {Hero} from "@/components/Hero.tsx";
-import { PiAt, PiMapPin, PiPhone } from 'react-icons/pi';
+import { PiAt, PiMapPin, PiPhone, PiCar, PiForkKnife, PiHandshake } from 'react-icons/pi';
 import {Separator} from "@/components/ui/separator.tsx";
 import {Button} from "@/components/ui/button.tsx";
 
@@ -51,10 +51,71 @@ export const Home: FunctionComponent = () => {
           </div>
         </div>
       </Content>
-      <Content className="pb-12">
-        <div className="flex flex-col gap-2 items-center">
+      <Content maxWidth="max-w-2xl" className="py-12">
+        <h2 className="text-4xl font-semibold pb-5">Unser Service</h2>
+        <div className="pl-3 flex space-x-12 md:flex-row justify-items-center items-center">
+          <div className="relative h-72 sm:h-52">
+            <Separator orientation="vertical" />
+            <div className="border-white border-4 absolute top-1/3 -translate-x-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+              <PiHandshake size={24}/>
+            </div>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-3xl font-semibold pb-3">Gästebetreuung</h3>
+            <p>Damit Ihr Aufenthalt in unserer Pension so angenehm und einzigartig wie möglich wird, engagieren sich unsere Mitarbeiter rund um die Uhr für Ihr persönliches Wohlbefinden.</p>
+          </div>
+        </div>
+        <div className="pl-3 flex space-x-12 md:flex-row justify-items-center items-center">
+          <div className="relative h-72 sm:h-52">
+            <Separator orientation="vertical" />
+            <div className="absolute top-1/3 -translate-x-1/2 border-white border-4 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+              <PiForkKnife size={24}/>
+            </div>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-3xl font-semibold pb-3">Pension</h3>
+            <p>Für unsere Hausgäste bieten wir von ca. 18.00 Uhr bis ca. 20.00 Uhr ein kleines Angebot von Speisen und Getränken, vom Hamburger Schnitzel bis zum frisch gezapften Bier, an. Natürlich werden auch alkohlfreie Getränke angeboten.</p>
+          </div>
+        </div>
+        <div className="pl-3 flex space-x-12 md:flex-row justify-items-center items-center">
+          <div className="relative h-72 sm:h-52">
+            <Separator orientation="vertical" />
+            <div className="absolute top-1/3 -translate-x-1/2 border-white border-4 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+              <PiCar size={24}/>
+            </div>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-3xl font-semibold pb-3">Parken</h3>
+            <p>Unterstellmöglichkeiten für Fahrräder, Motorräder und Paddelboote sind vorhanden. Parken können Sie auf den hoteleigenen Parkplätzen kostenlos. Keine Reservierung nötig.</p>
+          </div>
+        </div>
+      </Content>
+      <Content className="pb-6 sm:pb-12">
+        <div className="text-center flex flex-col gap-3 items-center">
           <h3 className="text-2xl font-semibold">Buchen Sie jetzt ihren Aufenthalt</h3>
           <Button className="w-fit text-md">Jetzt Buchen</Button>
+        </div>
+      </Content>
+      <Content className="py-6 md:py-12 bg-orange-50">
+        <div className="flex flex-col md:flex-row items-center md:space-x-10 space-y-6 md:space-y-0">
+          <div className="relative justify-self-center flex-1 w-full">
+            <img className="w-full max-h-96 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Vorwerk_Torgelow_Forsthaus_Torgelow_Urmesstischblatt_3249-1844.png/640px-Vorwerk_Torgelow_Forsthaus_Torgelow_Urmesstischblatt_3249-1844.png" alt="Torgelow Früher" />
+          </div>
+          <div className="md:h-96">
+            <Separator className="hidden md:block" orientation="vertical" />
+          </div>
+          <div className="flex-1">
+            <h2 className="text-4xl pb-5 font-semibold">Unsere Geschichte</h2>
+            <p className="max-w-lg md:max-w-none">
+              Im Jahr 1907 erbaut, öffnete der Gasthof "Goldener Adler" ebenfalls das erste mal seine Türen. Der Gasthof wurde sehr schnell in der Region bekannt und beliebt.
+              1929 wurde das dritte Stockwerk errichtet und mehrere Fremdenzimmer kamen dazu. Bis 1989 wurde der Gasthof vom Konsum übernommen und die Fremdenzimmer wurden zu Büroräumen umgestaltet.
+            </p>
+            <br/>
+            <p className="max-w-lg">
+              1990 wurde die Gaststätte Goldener Adler von Peter Rummel gepachtet und später gekauft. Die Gaststätte mit Außenanlage wurde 1994 komplett umgebaut und renoviert. 1995 wurden in der zweiten und dritten Etage die Gästezimmer wieder neu errichtet und die Gaststätte Goldener Adler wieder zum Gasthof. Die kleine Ferienwohnung kam 2003 dazu.
+              Im Juni 2012 wurde der Gasthof zur Pension und der öffentliche Gaststättenbetrieb wurde eingestellt.
+            </p>
+          </div>
         </div>
       </Content>
     </div>

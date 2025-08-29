@@ -9,7 +9,7 @@ interface HeroProps extends PropsWithChildren {
 
 export const Hero: FunctionComponent<HeroProps> = ({children, image, height, arrow}: HeroProps) => {
   return (
-    <div style={{height: height ?? '100vh'}} className="relative w-screen">
+    <div style={{height: height ?? '100vh'}} className="relative w-full">
       <img className="absolute inset-0 h-full w-full object-cover" src={image} alt="header image"/>
       <div id="overlay" className="absolute inset-0 h-full w-full bg-slate-800 opacity-40"></div>
       <div className="relative z-10 flex items-center justify-center h-full">
