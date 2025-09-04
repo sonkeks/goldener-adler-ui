@@ -24,7 +24,7 @@ const dateRangeSchema = z.object({
     .min(new Date(new Date().setHours(0, 0, 0, 0)), { error: "Check-In date cannot be in the past."}),
   to: z.date({ error: "End date is required" })
     .min(new Date(new Date().setHours(0, 0, 0, 0)), { error: "Check-Out date cannot be in the past."}),
-}).refine(
+}, { error: "Please provide a Date Range" }).refine(
   (data) => data.from <= data.to,
   { error: "Start date must be before end date", path: ["to"] }
 )
@@ -45,7 +45,16 @@ const formSchema = z.object({
     .or(z.string(""))
     .optional(),
   message: z.string().optional(),
-});
+}).refine(
+  (data) =>
+    (data.singleBedRooms && data.singleBedRooms > 0) ||
+    (data.doubleBedRooms && data.doubleBedRooms !== "Keine Auswahl") ||
+    (data.apartmentGuests && data.apartmentGuests > 0),
+  {
+    error: "Please select at least one room.",
+    path: ["apartmentGuests"],
+  }
+);
 
 // Type for the form values after Zod transformation
 type FormValues = z.infer<typeof formSchema>;
@@ -78,6 +87,8 @@ export const Booking: FunctionComponent = () => {
       doubleBedRooms: "Keine Auswahl",
       apartmentGuests: 0,
       extras: [],
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
       message: "",
@@ -85,16 +96,17 @@ export const Booking: FunctionComponent = () => {
   })
   
   const onSubmit = (values: FormValues) => {
+    // TODO: Send Mail with Cloudflare Worker & Resend
     console.log(values);
     form.reset();
   }
   
   return (
     <>
-      <Content maxWidth="max-w-[30.5rem]" className="mt-24">
+      <Content maxWidth="max-w-[33rem]" className="mt-24">
         <h1 className="text-center text-4xl font-semibold">Aufenthalt Buchen</h1>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-2 my-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-2 gap-x-4 my-6">
             <FormField
               control={form.control}
               name="dateRange"
@@ -105,10 +117,11 @@ export const Booking: FunctionComponent = () => {
                     <Calendar
                       locale={de}
                       mode="range"
+                      showOutsideDays={false}
                       numberOfMonths={2}
-                      selected={field.value}
+                      selected={field.value || {}}
                       onSelect={(value) => {
-                        field.onChange(value);
+                        field.onChange(value ? value : form.formState.defaultValues?.dateRange);
                       }}
                       disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                     />
@@ -117,12 +130,12 @@ export const Booking: FunctionComponent = () => {
                 </FormItem>
               )}
             />
-            <h3 className="text-xl font-semibold mb-4">Zimmerauswahl</h3>
+            <h3 className="text-xl font-semibold my-4">Zimmerauswahl</h3>
             <FormField
               control={form.control}
               name="singleBedRooms"
               render={({ field }) => (
-                <FormItem className="col-span-2 w-full md:w-[28rem] md:justify-self-center">
+                <FormItem className="col-span-2 w-full">
                   <FormLabel>Einzelzimmer</FormLabel>
                   <Select onValueChange={(e) => field.onChange(Number(e))} defaultValue={field.value?.toString()}>
                     <FormControl>
@@ -145,7 +158,7 @@ export const Booking: FunctionComponent = () => {
               control={form.control}
               name="doubleBedRooms"
               render={({ field }) => (
-                <FormItem className="col-span-2 w-full md:w-[28rem] md:justify-self-center">
+                <FormItem className="col-span-2 w-full">
                   <FormLabel>Doppelzimmer</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
@@ -167,7 +180,7 @@ export const Booking: FunctionComponent = () => {
               control={form.control}
               name="apartmentGuests"
               render={({ field }) => (
-                <FormItem className="col-span-2 w-full md:w-[28rem] md:justify-self-center">
+                <FormItem className="col-span-2 w-full">
                   <FormLabel>Ferienwohnung</FormLabel>
                   <Select onValueChange={(e) => field.onChange(Number(e))} defaultValue={field.value?.toString()}>
                     <FormControl>
@@ -219,6 +232,32 @@ export const Booking: FunctionComponent = () => {
                  />
             ))}
             <h3 className="col-span-2 text-xl font-semibold mt-8 mb-4">Kontaktangaben</h3>
+            <FormField
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem className="col-span-2 sm:col-span-1">
+                  <FormLabel>Vorname*</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your first name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem className="col-span-2 sm:col-span-1">
+                  <FormLabel>Nachname*</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your last name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="email"
