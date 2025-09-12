@@ -72,9 +72,42 @@ const de = {
         MinRentApartment: "Die Ferienwohnung ist erst ab 5 Nächten buchbar"
       }
     },
+    Contact: {
+      Hero: {
+        Title: "So erreichen Sie uns",
+        Subtitle: ""
+      }
+    },
+    Forms: {
+      Labels: {
+        FirstName: "Vorname",
+        LastName: "Nachname",
+        Email: "Email",
+        Message: "Nachricht"
+      },
+      Placeholders: {
+        FirstName: "Geben Sie ihren Vornamen an",
+        LastName: "Geben Sie ihren Nachnamen an",
+        Email: "Geben Sie ihre Email-Addresse an",
+        Message: "Ihre Nachricht an uns"
+      },
+      Errors: {
+        Required: {
+          FirstName: "Bitte geben Sie Ihren Vornamen an.",
+          LastName: "Bitte geben Sie Ihren Nachnamen an.",
+          Email: "Bitte geben Sie eine gültige E-Mail-Adresse an.",
+          Message: "Bitte geben Sie eine Nachricht ein."
+        },
+        Length: {
+          Max50: "Darf 50 Zeichen nicht überschreiten."
+        }
+      }
+    },
     Buttons: {
       More: "Mehr Entdecken",
       BookNow: "Jetzt Buchen",
+      Clear: "Zurücksetzen",
+      Submit: "Senden"
     },
     Menu: {
       Start: 'Start',

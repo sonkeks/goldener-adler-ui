@@ -15,6 +15,7 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
+import {Trans} from "react-i18next";
 
 const Form = FormProvider
 
@@ -150,7 +151,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
       className={cn("text-destructive text-sm min-h-5", className)}
       {...props}
     >
-      {body}
+      {error ? <Trans i18nKey={body as never} /> : body}
     </p>
   )
 }

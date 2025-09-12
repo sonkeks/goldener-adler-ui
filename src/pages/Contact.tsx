@@ -8,22 +8,24 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input.tsx";
 import {Textarea} from "@/components/ui/textarea.tsx";
 import {Button} from "@/components/ui/button.tsx";
+import {useTranslation} from "react-i18next";
 
 const formSchema = z.object({
   firstName: z.string().trim()
-    .min(1, { error: "Please provide your first name." })
-    .max(50, { error: "Cannot exceed 50 characters." }),
+    .min(1, { error: "public.Forms.Errors.Required.FirstName" })
+    .max(50, { error: "public.Forms.Errors.Length.Max50" }),
   lastName: z.string().trim()
-    .min(1, { error: "Please provide your last name." })
-    .max(50, { error: "Cannot exceed 50 characters." }),
+    .min(1, { error: "public.Forms.Errors.Required.LastName" })
+    .max(50, { error: "public.Forms.Errors.Length.Max50" }),
   email: z.email().trim()
-    .min(1, { error: "Please provide a valid email address." }),
+    .min(1, { error: "public.Forms.Errors.Required.Email" }),
   content: z.string().trim()
-    .min(1, { error: "Please provide a message." })
-    .max(1000, { error: "Cannot exceed 50 characters." }),
+    .min(1, { error: "public.Forms.Errors.Required.Message" })
+    .max(1000, { error: "public.Forms.Errors.Length.Max50" }),
 });
 
 export const Contact: FunctionComponent = () => {
+  const {t} = useTranslation();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,7 +45,7 @@ export const Contact: FunctionComponent = () => {
   return (
     <div>
      <Hero height="40vh" image="https://d2exd72xrrp1s7.cloudfront.net/www/guide/64047/1UijAT?width=3840&crop=false&q=60">
-       <h1 className="text-white text-6xl font-bold">So erreichen Sie uns</h1>
+       <h1 className="text-white text-6xl font-bold">{t('public.Contact.Hero.Title')}</h1>
      </Hero>
      <Content maxWidth="max-w-3xl" className="py-12">
       <Form {...form}>
@@ -53,9 +55,9 @@ export const Contact: FunctionComponent = () => {
             name="firstName"
             render={({ field }) => (
               <FormItem className="col-span-2 sm:col-span-1">
-                <FormLabel>First Name*</FormLabel>
+                <FormLabel>{t('public.Forms.Labels.FirstName')}*</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your First Name" {...field} />
+                  <Input placeholder={t('public.Forms.Placeholders.FirstName')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -66,9 +68,9 @@ export const Contact: FunctionComponent = () => {
             name="lastName"
             render={({ field }) => (
               <FormItem className="col-span-2 sm:col-span-1">
-                <FormLabel>Last Name*</FormLabel>
+                <FormLabel>{t('public.Forms.Labels.LastName')}*</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your Last Name" {...field} />
+                  <Input placeholder={t('public.Forms.Placeholders.LastName')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -79,9 +81,9 @@ export const Contact: FunctionComponent = () => {
             name="email"
             render={({ field }) => (
               <FormItem className="col-span-2">
-                <FormLabel>Email*</FormLabel>
+                <FormLabel>{t('public.Forms.Labels.Email')}*</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your Email Address" {...field} />
+                  <Input placeholder={t('public.Forms.Placeholders.Email')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -92,17 +94,17 @@ export const Contact: FunctionComponent = () => {
             name="content"
             render={({ field }) => (
               <FormItem className="col-span-2">
-                <FormLabel>Message*</FormLabel>
+                <FormLabel>{t('public.Forms.Labels.Message')}*</FormLabel>
                 <FormControl>
-                  <Textarea className="h-44" placeholder="Enter your Message" {...field} />
+                  <Textarea className="h-44" placeholder={t('public.Forms.Placeholders.Message')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
           <div className="flex gap-2 col-span-2 justify-end">
-            <Button type="reset" onClick={() => form.reset()} variant="outline">Clear</Button>
-            <Button type="submit">Submit</Button>
+            <Button type="reset" onClick={() => form.reset()} variant="outline">{t('public.Buttons.Clear')}</Button>
+            <Button type="submit">{t('public.Buttons.Submit')}</Button>
           </div>
         </form>
       </Form>

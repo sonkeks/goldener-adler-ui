@@ -74,9 +74,42 @@ const en = {
         MinRentApartment: "The apartment can only be booked for a minimum of 5 nights."
       }
     },
+    Contact: {
+      Hero: {
+        Title: "How to Contact us",
+        Subtitle: ""
+      }
+    },
+    Forms: {
+      Labels: {
+        FirstName: "First Name",
+        LastName: "Last Name",
+        Email: "Email",
+        Message: "Message"
+      },
+      Placeholders: {
+        FirstName: "Enter your First Name",
+        LastName: "Enter your Last Name",
+        Email: "Enter your Email Address",
+        Message: "Enter your Message"
+      },
+      Errors: {
+        Required: {
+          FirstName: "Please provide your first name.",
+          LastName: "Please provide your last name.",
+          Email: "Please provide a valid email address.",
+          Message: "Please provide a message."
+        },
+        Length: {
+          Max50: "Cannot exceed 50 characters."
+        }
+      }
+    },
     Buttons: {
       More: "Discover More",
       BookNow: "Book Now",
+      Clear: "Clear",
+      Submit: "Submit"
     },
     Menu: {
       Start: 'Home',
