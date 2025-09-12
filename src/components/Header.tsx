@@ -1,35 +1,37 @@
 import {useEffect, useState, type FunctionComponent} from "react";
 import {Button} from "@/components/ui/button.tsx";
 import {useLocation, useNavigate} from "react-router";
+import {useTranslation} from "react-i18next";
 
 type MenuItem = {
   label: string,
   path: string,
 }
 
-const MENU_ITEMS: MenuItem[] = [
-  {
-    label: "Start",
-    path: "/",
-  },
-  {
-    label: "Rooms",
-    path: "/rooms",
-  },
-  {
-    label: "Contact",
-    path: "/contact",
-  },
-  {
-    label: "Torgelow",
-    path: "/torgelow",
-  },
-]
-
 export const Header: FunctionComponent = () => {
   const [isTop, setIsTop] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
+  
+  const MENU_ITEMS: MenuItem[] = [
+    {
+      label: t("public.Menu.Start"),
+      path: "/",
+    },
+    {
+      label: t("public.Menu.Rooms"),
+      path: "/rooms",
+    },
+    {
+      label: t("public.Menu.Contact"),
+      path: "/contact",
+    },
+    {
+      label: t("public.Menu.Torgelow"),
+      path: "/torgelow",
+    },
+  ]
   
   useEffect(() => {
     if (location.pathname === "/booking"){
@@ -55,7 +57,9 @@ export const Header: FunctionComponent = () => {
           </li>
         ))}
         <div className="flex-1"></div>
-        <Button onClick={() => navigate('booking')} className={`text-md ${isTop ? "" : ""}`} variant={isTop ? "secondary" : "default"}>Book Now</Button>
+        <Button onClick={() => navigate('booking')} className={`text-md ${isTop ? "" : ""}`} variant={isTop ? "secondary" : "default"}>
+          {t("public.Buttons.BookNow")}
+        </Button>
       </menu>
     </div>
   )

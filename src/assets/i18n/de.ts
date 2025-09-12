@@ -2,7 +2,8 @@ const de = {
   public: {
     General: {
       Rooms: "Zimmer",
-      Apartment: "Ferienwohnung"
+      Apartment: "Ferienwohnung",
+      BookingCTA: "Buchen Sie jetzt ihren Aufenthalt"
     },
     Home: {
       Hero: {
@@ -25,10 +26,7 @@ const de = {
         GuestService: "Damit Ihr Aufenthalt in unserer Pension so angenehm und einzigartig wie möglich wird, engagieren sich unsere Mitarbeiter rund um die Uhr für Ihr persönliches Wohlbefinden.",
         Pension: "Für unsere Hausgäste bieten wir von ca. 18.00 Uhr bis ca. 20.00 Uhr ein kleines Angebot von Speisen und Getränken, vom Hamburger Schnitzel bis zum frisch gezapften Bier, an. Natürlich werden auch alkohlfreie Getränke angeboten.",
         Parking: "Unterstellmöglichkeiten für Fahrräder, Motorräder und Paddelboote sind vorhanden. Parken können Sie auf den hoteleigenen Parkplätzen kostenlos – keine Reservierung nötig.",
-        History: [
-          "Im Jahr 1907 erbaut, öffnete der Gasthof \"Goldener Adler\" ebenfalls das erste mal seine Türen. Der Gasthof wurde sehr schnell in der Region bekannt und beliebt. 1929 wurde das dritte Stockwerk errichtet und mehrere Fremdenzimmer kamen dazu. Bis 1989 wurde der Gasthof vom Konsum übernommen und die Fremdenzimmer wurden zu Büroräumen umgestaltet.",
-          "1990 wurde die Gaststätte Goldener Adler von Peter Rummel gepachtet und später gekauft. Die Gaststätte mit Außenanlage wurde 1994 komplett umgebaut und renoviert. 1995 wurden in der zweiten und dritten Etage die Gästezimmer wieder neu errichtet und die Gaststätte Goldener Adler wieder zum Gasthof. Die kleine Ferienwohnung kam 2003 dazu. Im Juni 2012 wurde der Gasthof zur Pension und der öffentliche Gaststättenbetrieb wurde eingestellt."
-        ]
+        History: "Im Jahr 1907 erbaut, öffnete der Gasthof \"Goldener Adler\" ebenfalls das erste mal seine Türen. Der Gasthof wurde sehr schnell in der Region bekannt und beliebt. 1929 wurde das dritte Stockwerk errichtet und mehrere Fremdenzimmer kamen dazu. Bis 1989 wurde der Gasthof vom Konsum übernommen und die Fremdenzimmer wurden zu Büroräumen umgestaltet.<br/><br/>1990 wurde die Gaststätte Goldener Adler von Peter Rummel gepachtet und später gekauft. Die Gaststätte mit Außenanlage wurde 1994 komplett umgebaut und renoviert. 1995 wurden in der zweiten und dritten Etage die Gästezimmer wieder neu errichtet und die Gaststätte Goldener Adler wieder zum Gasthof. Die kleine Ferienwohnung kam 2003 dazu. Im Juni 2012 wurde der Gasthof zur Pension und der öffentliche Gaststättenbetrieb wurde eingestellt."
       }
     },
     Buttons: {

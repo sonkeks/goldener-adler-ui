@@ -2,7 +2,8 @@ const en = {
   public: {
     General: {
       Rooms: "Rooms",
-      Apartment: "Apartment"
+      Apartment: "Apartment",
+      BookingCTA: "Book your stay with us now"
     },
     Home: {
       Hero: {
@@ -25,10 +26,7 @@ const en = {
         GuestService: "To make your stay at our guesthouse as pleasant and memorable as possible, our staff are dedicated around the clock to your personal comfort and well-being.",
         Pension: "For our in-house guests, we offer a small selection of food and drinks from around 6:00 PM to 8:00 PM, ranging from a Hamburger schnitzel to freshly tapped beer. Non-alcoholic beverages are, of course, also available.",
         Parking: "Covered storage is available for bicycles, motorcycles, and paddle boats. You can park free of charge in the hotel’s parking lot – no reservation required.",
-        History: [
-          "Built in 1907, the inn \"Goldener Adler\" opened its doors for the first time. It quickly became well-known and popular in the region. In 1929, a third floor was added, along with several guest rooms. Until 1989, the inn was operated by the Konsum, and the guest rooms were converted into office space.",
-          "In 1990, the “Goldener Adler” inn was leased and later purchased by Peter Hummel. In 1994, the inn and its outdoor area were completely renovated and rebuilt. In 1995, guest rooms were newly established on the second and third floors, returning the “Goldener Adler” to its status as an inn. A small holiday apartment was added in 2003. In June 2012, the inn was converted into a guesthouse, and the public restaurant operations were discontinued."
-        ]
+        History: "Built in 1907, the inn \"Goldener Adler\" opened its doors for the first time. It quickly became well-known and popular in the region. In 1929, a third floor was added, along with several guest rooms. Until 1989, the inn was operated by the Konsum, and the guest rooms were converted into office space.<br/><br/>In 1990, the “Goldener Adler” inn was leased and later purchased by Peter Hummel. In 1994, the inn and its outdoor area were completely renovated and rebuilt. In 1995, guest rooms were newly established on the second and third floors, returning the “Goldener Adler” to its status as an inn. A small holiday apartment was added in 2003. In June 2012, the inn was converted into a guesthouse, and the public restaurant operations were discontinued."
       }
     },
     Buttons: {
