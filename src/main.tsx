@@ -12,10 +12,12 @@ import {Rooms} from "@/pages/Rooms.tsx";
 import {Contact} from "@/pages/Contact.tsx";
 import {Torgelow} from "@/pages/Torgelow.tsx";
 import {Booking} from "@/pages/Booking.tsx";
+import ScrollToTop from "@/ScrollToTop.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
