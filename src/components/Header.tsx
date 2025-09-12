@@ -2,6 +2,7 @@ import {useEffect, useState, type FunctionComponent} from "react";
 import {Button} from "@/components/ui/button.tsx";
 import {useLocation, useNavigate} from "react-router";
 import {useTranslation} from "react-i18next";
+import {LanguageSelect} from "@/components/ui/LanguageSelect.tsx";
 
 type MenuItem = {
   label: string,
@@ -57,6 +58,7 @@ export const Header: FunctionComponent = () => {
           </li>
         ))}
         <div className="flex-1"></div>
+        <LanguageSelect isTop={isTop}></LanguageSelect>
         <Button onClick={() => navigate('booking')} className={`text-md ${isTop ? "" : ""}`} variant={isTop ? "secondary" : "default"}>
           {t("public.Buttons.BookNow")}
         </Button>

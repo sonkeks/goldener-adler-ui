@@ -12,12 +12,12 @@ import {
 import {useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {de} from "date-fns/locale";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {Textarea} from "@/components/ui/textarea.tsx";
 import {Button} from "@/components/ui/button.tsx";
+import {getCurrentLocale} from "@/helpers/i18n-locale.ts";
 
 const dateRangeSchema = z.object({
   from: z.date({ error: "Start date is required" })
@@ -115,7 +115,7 @@ export const Booking: FunctionComponent = () => {
                   <FormControl>
                     {/* TODO: Handle Locale Change */}
                     <Calendar
-                      locale={de}
+                      locale={getCurrentLocale()}
                       mode="range"
                       showOutsideDays={false}
                       numberOfMonths={2}

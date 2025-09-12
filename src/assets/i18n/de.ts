@@ -1,5 +1,9 @@
 const de = {
   public: {
+    Languages: {
+      English: "Englisch",
+      German: "Deutsch",
+    },
     General: {
       Rooms: "Zimmer",
       Apartment: "Ferienwohnung",
