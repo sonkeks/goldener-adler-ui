@@ -18,7 +18,7 @@ const formSchema = z.object({
   lastName: z.string().trim()
     .min(1, { error: "public.Forms.Errors.Required.LastName" })
     .max(50, { error: "public.Forms.Errors.Length.Max50" }),
-  email: z.email().trim()
+  email: z.email({ error: "public.Forms.Errors.Required.Email"}).trim()
     .min(1, { error: "public.Forms.Errors.Required.Email" }),
   content: z.string().trim()
     .min(1, { error: "public.Forms.Errors.Required.Message" })

@@ -84,29 +84,60 @@ const en = {
     },
     Booking: {
       Title: 'Booking Accommodation',
+      Headings: {
+        RoomSelection: "Room Selection",
+        AdditionalDetails: "Additional Details",
+        ContactDetails: "Contact Details",
+      },
+      Options: {
+        NoSelection: 'No Selection',
+        Rooms_one: 'Room',
+        Rooms_other: 'Rooms',
+        People_one: 'People',
+        People_other: 'People',
+        AdditionalBed: 'Additional Bed',
+      }
     },
     Forms: {
       Labels: {
         FirstName: "First Name",
         LastName: "Last Name",
+        Phone: "Phone Number",
         Email: "Email",
-        Message: "Message"
+        Message: "Message",
+        Bike: "Bike",
+        Motorcycle: "Motorcycle",
+        Boat: "Canoe",
+        Pet: "Pet",
+        Optional: "optional",
       },
       Placeholders: {
         FirstName: "Enter your First Name",
         LastName: "Enter your Last Name",
+        Phone: "Enter your Phone Number",
         Email: "Enter your Email Address",
         Message: "Enter your Message"
       },
       Errors: {
         Required: {
+          Rooms: "Please select at least one option.",
           FirstName: "Please provide your first name.",
           LastName: "Please provide your last name.",
+          Phone: "Please provide a valid phone number.",
           Email: "Please provide a valid email address.",
           Message: "Please provide a message."
         },
         Length: {
           Max50: "Cannot exceed 50 characters."
+        },
+        Date: {
+          Missing: "Please provide a date range.",
+          CheckInRequired: "Check-In date is required.",
+          CheckOutRequired: "Check-Out date is required.",
+          CheckInPast: "Check-In date can't be in the past.",
+          CheckOutPast: "Check-Out date can't be in the past.",
+          Order: "Check-In date must be before Check-Out date.",
+          SameDay: "Please select a future date for Check-Out."
         }
       }
     },

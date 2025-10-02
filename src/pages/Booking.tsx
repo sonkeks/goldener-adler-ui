@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import {type FunctionComponent} from "react";
+import {type FunctionComponent, useRef} from "react";
 import {Calendar} from "@/components/ui/calendar.tsx";
 import {
   Form,
@@ -18,77 +18,43 @@ import {Input} from "@/components/ui/input.tsx";
 import {Textarea} from "@/components/ui/textarea.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {getCurrentLocale} from "@/helpers/i18n-locale.ts";
-import {useTranslation} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import {Page} from "@/components/layouts/Page.tsx";
+import type {TranslationKeys} from "@/i18n.ts";
+import {createBookingSchema} from "@/helpers/createBookingSchema.ts";
 
-const dateRangeSchema = z.object({
-  from: z.date({ error: "Start date is required" })
-    .min(new Date(new Date().setHours(0, 0, 0, 0)), { error: "Check-In date cannot be in the past."}),
-  to: z.date({ error: "End date is required" })
-    .min(new Date(new Date().setHours(0, 0, 0, 0)), { error: "Check-Out date cannot be in the past."}),
-}, { error: "Please provide a Date Range" }).refine(
-  (data) => data.from <= data.to,
-  { error: "Start date must be before end date", path: ["to"] }
-)
-
-const formSchema = z.object({
-  dateRange: dateRangeSchema,
-  firstName: z.string()
-    .min(1, { message: "Please provide your first name." }),
-  lastName: z.string()
-    .min(1, { message: "Please provide your last name." }),
-  singleBedRooms: z.number().max(3).optional(),
-  doubleBedRooms: z.string().optional(),
-  apartmentGuests: z.number().max(3).optional(),
-  extras: z.array(z.string()),
-  email: z.email(),
-  phone: z.string()
-    .regex(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, "Invalid phone number")
-    .or(z.string(""))
-    .optional(),
-  message: z.string().optional(),
-}).refine(
-  (data) =>
-    (data.singleBedRooms && data.singleBedRooms > 0) ||
-    (data.doubleBedRooms && data.doubleBedRooms !== "Keine Auswahl") ||
-    (data.apartmentGuests && data.apartmentGuests > 0),
-  {
-    error: "Please select at least one room.",
-    path: ["apartmentGuests"],
-  }
-);
-
-// Type for the form values after Zod transformation
-type FormValues = z.infer<typeof formSchema>;
-
-const options = [
+const options: {id: string, label: TranslationKeys}[] = [
   {
     id: "bike",
-    label: "Fahrrad",
+    label: "public.Forms.Labels.Bike",
   },
   {
     id: "motorcycle",
-    label: "Motorrad",
+    label: "public.Forms.Labels.Motorcycle",
   },
   {
     id: "boat",
-    label: "Padelboot",
+    label: "public.Forms.Labels.Boat",
   },
   {
     id: "pet",
-    label: "Haustier",
+    label: "public.Forms.Labels.Pet",
   },
 ] as const
 
 export const Booking: FunctionComponent = () => {
   const { t } = useTranslation();
+  const formSchema = createBookingSchema();
+  type FormValues = z.infer<typeof formSchema>;
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       dateRange: undefined,
-      singleBedRooms: 0,
-      doubleBedRooms: "Keine Auswahl",
-      apartmentGuests: 0,
+      rooms: {
+        singleBedRooms: 0,
+        doubleBedRooms: "none",
+        apartmentGuests: 0,
+      },
       extras: [],
       firstName: "",
       lastName: "",
@@ -97,6 +63,17 @@ export const Booking: FunctionComponent = () => {
       message: "",
     },
   })
+  
+  const fieldRefs = useRef<Record<string, HTMLElement | null>>({});
+  
+  const onError = (errors: typeof form.formState.errors) => {
+    const firstErrorKey = Object.keys(errors)[0];
+    const firstErrorField = fieldRefs.current[firstErrorKey];
+    if (firstErrorField) {
+      firstErrorField.scrollIntoView({behavior: "smooth", block: "center"});
+      firstErrorField.focus({preventScroll: true});
+    }
+  }
   
   const onSubmit = (values: FormValues) => {
     // TODO: Send Mail with Cloudflare Worker & Resend
@@ -107,16 +84,19 @@ export const Booking: FunctionComponent = () => {
   return (
     <Page title={t('public.Booking.Title')}>
       <Content maxWidth="max-w-[33rem]" className="mt-24">
-        <h1 className="text-center text-4xl font-semibold">Aufenthalt Buchen</h1>
+        <h1 className="text-center text-4xl font-semibold">{t('public.Booking.Title')}</h1>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-2 gap-x-4 my-6">
+          <form onSubmit={form.handleSubmit(onSubmit, onError)} className="grid items-start grid-cols-2 gap-x-4 my-6">
             <FormField
               control={form.control}
               name="dateRange"
               render={({ field }) => (
                 <FormItem className="col-span-2 justify-self-center">
                   <FormControl>
-                    {/* TODO: Handle Locale Change */}
+                    <div ref={(element) => {
+                      field.ref(element);
+                      fieldRefs.current["dateRange"] = element;
+                    }}>
                     <Calendar
                       locale={getCurrentLocale()}
                       mode="range"
@@ -128,81 +108,94 @@ export const Booking: FunctionComponent = () => {
                       }}
                       disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                     />
+                    </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-center" />
                 </FormItem>
               )}
             />
-            <h3 className="text-xl font-semibold my-4">Zimmerauswahl</h3>
+            <h3 className="text-xl font-semibold my-4 col-span-2">{t('public.Booking.Headings.RoomSelection')}</h3>
+            {form.formState.errors.rooms?.message && (
+              <p className="text-sm text-red-500 mb-4 col-span-2"><Trans i18nKey={form.formState.errors.rooms.message as never}/></p>
+            )}
             <FormField
               control={form.control}
-              name="singleBedRooms"
+              name="rooms.singleBedRooms"
               render={({ field }) => (
-                <FormItem className="col-span-2 w-full">
-                  <FormLabel>Einzelzimmer</FormLabel>
-                  <Select onValueChange={(e) => field.onChange(Number(e))} defaultValue={field.value?.toString()}>
+                <FormItem className="col-span-2 w-full mb-5">
+                  <FormLabel>{t('public.Rooms.General.SingleBedroom', {count: 2})}</FormLabel>
+                  <Select onValueChange={(e) => {
+                    field.onChange(Number(e));
+                    form.trigger(["rooms"]);
+                  }} value={field.value?.toString()}>
+                    <FormControl>
+                      <SelectTrigger className="w-full" ref={(element) => {
+                        field.ref(element);
+                        fieldRefs.current["rooms"] = element;
+                      }}>
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="0">{t('public.Booking.Options.NoSelection')}</SelectItem>
+                      <SelectItem value="1">1 {t('public.Booking.Options.Rooms', {count: 1})}</SelectItem>
+                      <SelectItem value="2">2 {t('public.Booking.Options.Rooms', {count: 2})}</SelectItem>
+                      <SelectItem value="3">3 {t('public.Booking.Options.Rooms', {count: 3})}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="rooms.doubleBedRooms"
+              render={({ field }) => (
+                <FormItem className="col-span-2 w-full mb-5">
+                  <FormLabel>{t('public.Rooms.General.DoubleBedroom', {count: 2})}</FormLabel>
+                  <Select onValueChange={(e) => {
+                    field.onChange(e);
+                    form.trigger(["rooms"]);
+                  }} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="0">Keine Auswahl</SelectItem>
-                      <SelectItem value="1">1 Zimmer</SelectItem>
-                      <SelectItem value="2">2 Zimmer (je 1 Person)</SelectItem>
-                      <SelectItem value="3">3 Zimmer (je 1 Person)</SelectItem>
+                      <SelectItem value="none">{t('public.Booking.Options.NoSelection')}</SelectItem>
+                      <SelectItem value="1">{`1 ${t('public.Booking.Options.Rooms', {count: 1})} (2 ${t('public.Booking.Options.People', {count: 2})})`}</SelectItem>
+                      <SelectItem value="1+">{`1 ${t('public.Booking.Options.Rooms', {count: 1})} + ${t('public.Booking.Options.AdditionalBed')}`}</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="doubleBedRooms"
+              name="rooms.apartmentGuests"
               render={({ field }) => (
-                <FormItem className="col-span-2 w-full">
-                  <FormLabel>Doppelzimmer</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormItem className="col-span-2 w-full mb-5">
+                  <FormLabel>{t('public.General.Apartment')}</FormLabel>
+                  <Select onValueChange={(e) => {
+                    field.onChange(Number(e));
+                    form.trigger(["rooms"]);
+                  }} value={field.value?.toString()}>
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Keine Auswahl">Keine Auswahl</SelectItem>
-                      <SelectItem value="1 Zimmer">1 Zimmer (2 Personen)</SelectItem>
-                      <SelectItem value="2 Zimmer">1 Zimmer + Aufbettung</SelectItem>
+                      <SelectItem value="0">{t('public.Booking.Options.NoSelection')}</SelectItem>
+                      <SelectItem value="1">1 {t('public.Booking.Options.People', {count: 1})}</SelectItem>
+                      <SelectItem value="2">2 {t('public.Booking.Options.People', {count: 2})}</SelectItem>
+                      <SelectItem value="3">3 {t('public.Booking.Options.People', {count: 3})}</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage />
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="apartmentGuests"
-              render={({ field }) => (
-                <FormItem className="col-span-2 w-full">
-                  <FormLabel>Ferienwohnung</FormLabel>
-                  <Select onValueChange={(e) => field.onChange(Number(e))} defaultValue={field.value?.toString()}>
-                    <FormControl>
-                      <SelectTrigger className="w-full">
-                        <SelectValue />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="0">Keine Auswahl</SelectItem>
-                      <SelectItem value="1">1 Person</SelectItem>
-                      <SelectItem value="2">2 Personen</SelectItem>
-                      <SelectItem value="3">3 Personen</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <h3 className="text-xl font-semibold mb-4">Weitere Angaben</h3>
+            <h3 className="text-xl font-semibold mb-4">{t('public.Booking.Headings.AdditionalDetails')}</h3>
             {options.map((option) => (
               <FormField
                 key={option.id}
@@ -228,21 +221,24 @@ export const Booking: FunctionComponent = () => {
                       />
                     </FormControl>
                     <FormLabel className="text-sm font-normal">
-                      {option.label}
+                      {t(option.label)}
                     </FormLabel>
                   </FormItem>
                 )}
                  />
             ))}
-            <h3 className="col-span-2 text-xl font-semibold mt-8 mb-4">Kontaktangaben</h3>
+            <h3 className="col-span-2 text-xl font-semibold mt-8 mb-4">{t('public.Booking.Headings.ContactDetails')}</h3>
             <FormField
               control={form.control}
               name="firstName"
               render={({ field }) => (
-                <FormItem className="col-span-2 sm:col-span-1">
-                  <FormLabel>Vorname*</FormLabel>
+                <FormItem className="col-span-2 sm:col-span-1 mb-5">
+                  <FormLabel>{t('public.Forms.Labels.FirstName')}*</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your first name" {...field} />
+                    <Input placeholder={t('public.Forms.Placeholders.FirstName')} {...field} ref={(element) => {
+                      field.ref(element);
+                      fieldRefs.current["firstName"] = element;
+                    }} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -252,10 +248,13 @@ export const Booking: FunctionComponent = () => {
               control={form.control}
               name="lastName"
               render={({ field }) => (
-                <FormItem className="col-span-2 sm:col-span-1">
-                  <FormLabel>Nachname*</FormLabel>
+                <FormItem className="col-span-2 sm:col-span-1 mb-5">
+                  <FormLabel>{t('public.Forms.Labels.LastName')}*</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your last name" {...field} />
+                    <Input placeholder={t('public.Forms.Placeholders.LastName')} {...field} ref={(element) => {
+                      field.ref(element);
+                      fieldRefs.current["lastName"] = element;
+                    }}/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -265,10 +264,13 @@ export const Booking: FunctionComponent = () => {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Email*</FormLabel>
+                <FormItem className="col-span-2 mb-5">
+                  <FormLabel>{t('public.Forms.Labels.Email')}*</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="Enter your Email Address" {...field} />
+                    <Input type="email" placeholder={t('public.Forms.Placeholders.Email')} {...field} ref={(element) => {
+                      field.ref(element);
+                      fieldRefs.current["email"] = element;
+                    }}/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -278,10 +280,13 @@ export const Booking: FunctionComponent = () => {
               control={form.control}
               name="phone"
               render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Telefonnummer (optional)</FormLabel>
+                <FormItem className="col-span-2 mb-5">
+                  <FormLabel>{`${t('public.Forms.Labels.Phone')} (${t('public.Forms.Labels.Optional')})`}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your Phone Number" {...field} />
+                    <Input placeholder={t('public.Forms.Placeholders.Phone')} {...field} ref={(element) => {
+                      field.ref(element);
+                      fieldRefs.current["phone"] = element;
+                    }}/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -291,18 +296,18 @@ export const Booking: FunctionComponent = () => {
               control={form.control}
               name="message"
               render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Nachricht (optional)</FormLabel>
+                <FormItem className="col-span-2 mb-5">
+                  <FormLabel>{`${t('public.Forms.Labels.Message')} (${t('public.Forms.Labels.Optional')})`}</FormLabel>
                   <FormControl>
-                    <Textarea className="h-32" placeholder="Enter your Message" {...field} />
+                    <Textarea className="h-32" placeholder={t('public.Forms.Placeholders.Message')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <div className="flex gap-2 col-span-2 justify-end">
-              <Button type="reset" onClick={() => form.reset()} variant="outline">Zurücksetzen</Button>
-              <Button type="submit">Senden</Button>
+              <Button type="reset" onClick={() => form.reset()} variant="outline">{t('public.Buttons.Clear')}</Button>
+              <Button type="submit">{t('public.Buttons.Submit')}</Button>
             </div>
           </form>
         </Form>

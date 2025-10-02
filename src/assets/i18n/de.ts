@@ -82,29 +82,57 @@ const de = {
     },
     Booking: {
       Title: 'Aufenthalt Buchen',
+      Headings: {
+        RoomSelection: "Zimmerauswahl",
+        AdditionalDetails: "Weitere Angaben",
+        ContactDetails: "Kontaktangaben",
+      },
+      Options: {
+        NoSelection: 'Keine Auswahl',
+        Rooms_one: 'Zimmer',
+        Rooms_other: 'Zimmer',
+        People_one: 'Person',
+        People_other: 'Personen',
+        AdditionalBed: 'Aufbettung',
+      }
     },
     Forms: {
       Labels: {
         FirstName: "Vorname",
         LastName: "Nachname",
+        Phone: "Telefonnummer",
         Email: "Email",
-        Message: "Nachricht"
+        Message: "Nachricht",
+        Bike: "Fahrrad",
+        Motorcycle: "Motorrad",
+        Boat: "Padelboot",
+        Pet: "Haustier",
+        Optional: "optional",
       },
       Placeholders: {
         FirstName: "Geben Sie ihren Vornamen an",
         LastName: "Geben Sie ihren Nachnamen an",
+        Phone: "Geben Sie ihre Telefonnummer an",
         Email: "Geben Sie ihre Email-Addresse an",
         Message: "Ihre Nachricht an uns"
       },
       Errors: {
         Required: {
-          FirstName: "Bitte geben Sie Ihren Vornamen an.",
-          LastName: "Bitte geben Sie Ihren Nachnamen an.",
-          Email: "Bitte geben Sie eine gültige E-Mail-Adresse an.",
+          Rooms: "Bitte mindestens eine der Optionen wählen.",
+          FirstName: "Bitte Vornamen angeben.",
+          LastName: "Bitte Nachnamen angeben.",
+          Email: "Bitte gültige E-Mail-Adresse angeben.",
           Message: "Bitte geben Sie eine Nachricht ein."
         },
         Length: {
           Max50: "Darf 50 Zeichen nicht überschreiten."
+        },
+        Date: {
+          Missing: "Bitte Zeitraum angeben.",
+          Required: "Bitte das {{date}} angeben.",
+          Past: "Das {{date}} liegt in der Vergangenheit.",
+          Order: "Der Check-In muss vor dem Check-Out stattfinden.",
+          SameDay: "Bitte ein zukünftiges Datum für den Check-Out auswählen."
         }
       }
     },
