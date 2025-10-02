@@ -34,6 +34,7 @@ const en = {
       }
     },
     Rooms: {
+      Title: "Rooms & Apartment",
       Hero: {
         Title: "Rooms & Apartment",
         Subtitle: "",
@@ -75,10 +76,14 @@ const en = {
       }
     },
     Contact: {
+      Title: "Contact",
       Hero: {
         Title: "How to Contact us",
         Subtitle: ""
       }
+    },
+    Booking: {
+      Title: 'Booking Accommodation',
     },
     Forms: {
       Labels: {

@@ -1,9 +1,10 @@
 import type {FunctionComponent} from "react";
+import {Page} from "@/components/layouts/Page.tsx";
 
 export const Login: FunctionComponent = () => {
   return (
-    <div>
+    <Page>
       Login
-    </div>
+    </Page>
   )
 }

@@ -18,6 +18,8 @@ import {Input} from "@/components/ui/input.tsx";
 import {Textarea} from "@/components/ui/textarea.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {getCurrentLocale} from "@/helpers/i18n-locale.ts";
+import {useTranslation} from "react-i18next";
+import {Page} from "@/components/layouts/Page.tsx";
 
 const dateRangeSchema = z.object({
   from: z.date({ error: "Start date is required" })
@@ -79,6 +81,7 @@ const options = [
 ] as const
 
 export const Booking: FunctionComponent = () => {
+  const { t } = useTranslation();
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -102,7 +105,7 @@ export const Booking: FunctionComponent = () => {
   }
   
   return (
-    <>
+    <Page title={t('public.Booking.Title')}>
       <Content maxWidth="max-w-[33rem]" className="mt-24">
         <h1 className="text-center text-4xl font-semibold">Aufenthalt Buchen</h1>
         <Form {...form}>
@@ -304,6 +307,6 @@ export const Booking: FunctionComponent = () => {
           </form>
         </Form>
       </Content>
-    </>
+    </Page>
   )
 }

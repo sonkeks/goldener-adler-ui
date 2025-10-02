@@ -34,6 +34,7 @@ const de = {
       }
     },
     Rooms: {
+      Title: "Zimmer & Ferienwohnung",
       Hero: {
         Title: "Zimmer & Ferienwohnung",
         Subtitle: "",
@@ -73,10 +74,14 @@ const de = {
       }
     },
     Contact: {
+      Title: "Kontakt",
       Hero: {
         Title: "So erreichen Sie uns",
         Subtitle: ""
       }
+    },
+    Booking: {
+      Title: 'Aufenthalt Buchen',
     },
     Forms: {
       Labels: {

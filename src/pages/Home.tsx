@@ -6,13 +6,14 @@ import {Separator} from "@/components/ui/separator.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Trans, useTranslation} from "react-i18next";
 import {useNavigate} from "react-router";
+import {Page} from "@/components/layouts/Page.tsx";
 
 export const Home: FunctionComponent = () => {
   const {t} = useTranslation();
   const navigate = useNavigate();
   
   return (
-    <div className="">
+    <Page>
       <Hero arrow image="https://cdn.nordkurier.de/2023/12/06/79484910-72fd-4684-ba8e-82b426ff9d85.jpeg?w=2048&auto=compress%2Cformat">
         <h1 className="text-6xl font-bold text-white">
           {t('public.Home.Hero.Title')}
@@ -130,6 +131,6 @@ export const Home: FunctionComponent = () => {
           </div>
         </div>
       </Content>
-    </div>
+    </Page>
   )
 }

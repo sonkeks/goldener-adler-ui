@@ -18,6 +18,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {useNavigate} from "react-router";
 import {useTranslation} from "react-i18next";
 import type {IconType} from "react-icons";
+import {Page} from "@/components/layouts/Page.tsx";
 
 type Amenity = {
   id: string,
@@ -106,7 +107,7 @@ export const Rooms: FunctionComponent = () => {
   ]
   
   return (
-    <>
+    <Page title={t('public.Rooms.Title')}>
       <Hero arrow image="http://gasthof-goldener-adler.de/images/pension/ferienwohnung_06.JPG">
         <h1 className="text-4xl text-center sm:text-6xl text-white font-semibold">{t('public.Rooms.Hero.Title')}</h1>
       </Hero>
@@ -218,6 +219,6 @@ export const Rooms: FunctionComponent = () => {
           <Button onClick={() => navigate("/booking")} className="w-fit text-md">{t('public.Buttons.BookNow')}</Button>
         </div>
       </Content>
-    </>
+    </Page>
   )
 }

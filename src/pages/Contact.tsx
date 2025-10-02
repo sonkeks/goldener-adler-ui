@@ -9,6 +9,7 @@ import {Input} from "@/components/ui/input.tsx";
 import {Textarea} from "@/components/ui/textarea.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useTranslation} from "react-i18next";
+import {Page} from "@/components/layouts/Page.tsx";
 
 const formSchema = z.object({
   firstName: z.string().trim()
@@ -43,7 +44,7 @@ export const Contact: FunctionComponent = () => {
   }
   
   return (
-    <div>
+    <Page title={t('public.Contact.Title')}>
      <Hero height="40vh" image="https://d2exd72xrrp1s7.cloudfront.net/www/guide/64047/1UijAT?width=3840&crop=false&q=60">
        <h1 className="text-white text-6xl font-bold">{t('public.Contact.Hero.Title')}</h1>
      </Hero>
@@ -109,6 +110,6 @@ export const Contact: FunctionComponent = () => {
         </form>
       </Form>
      </Content>
-    </div>
+    </Page>
   )
 }
