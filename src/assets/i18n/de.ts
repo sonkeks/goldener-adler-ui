@@ -96,8 +96,13 @@ const de = {
         AdditionalBed: 'Aufbettung',
       }
     },
+    Review: {
+      Title: "Übersicht",
+    },
     Forms: {
       Labels: {
+        CheckIn: "Check-In",
+        CheckOut: "Check-Out",
         FirstName: "Vorname",
         LastName: "Nachname",
         Phone: "Telefonnummer",
@@ -129,8 +134,10 @@ const de = {
         },
         Date: {
           Missing: "Bitte Zeitraum angeben.",
-          Required: "Bitte das {{date}} angeben.",
-          Past: "Das {{date}} liegt in der Vergangenheit.",
+          CheckInRequired: "Bitte Check-In Datum auswählen.",
+          CheckOutRequired: "Bitte Check-Out Datum auswählen.",
+          CheckInPast: "Check-In Datum liegt in der Vergangenheit.",
+          CheckOutPast: "Check-Out Datum liegt in der Vergangenheit.",
           Order: "Der Check-In muss vor dem Check-Out stattfinden.",
           SameDay: "Bitte ein zukünftiges Datum für den Check-Out auswählen."
         }
@@ -140,7 +147,9 @@ const de = {
       More: "Mehr Entdecken",
       BookNow: "Jetzt Buchen",
       Clear: "Zurücksetzen",
-      Submit: "Senden"
+      Submit: "Senden",
+      Review: "Zur Übersicht",
+      Book: "Buchen",
     },
     Menu: {
       Start: 'Start',

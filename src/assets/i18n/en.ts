@@ -98,8 +98,13 @@ const en = {
         AdditionalBed: 'Additional Bed',
       }
     },
+    Review: {
+      Title: "Review",
+    },
     Forms: {
       Labels: {
+        CheckIn: "Check-In",
+        CheckOut: "Check-Out",
         FirstName: "First Name",
         LastName: "Last Name",
         Phone: "Phone Number",
@@ -145,7 +150,9 @@ const en = {
       More: "Discover More",
       BookNow: "Book Now",
       Clear: "Clear",
-      Submit: "Submit"
+      Submit: "Submit",
+      Review: "Review",
+      Book: "Book",
     },
     Menu: {
       Start: 'Home',

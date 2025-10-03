@@ -1,4 +1,4 @@
-import { Content } from "@/components/Content";
+import { Content } from "@/components/Content.tsx";
 import {type FunctionComponent, useRef} from "react";
 import {Calendar} from "@/components/ui/calendar.tsx";
 import {
@@ -10,7 +10,6 @@ import {
   FormMessage
 } from "@/components/ui/form.tsx";
 import {useForm} from "react-hook-form";
-import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
@@ -20,51 +19,34 @@ import {Button} from "@/components/ui/button.tsx";
 import {getCurrentLocale} from "@/helpers/i18n-locale.ts";
 import {Trans, useTranslation} from "react-i18next";
 import {Page} from "@/components/layouts/Page.tsx";
-import type {TranslationKeys} from "@/i18n.ts";
-import {createBookingSchema} from "@/helpers/createBookingSchema.ts";
-
-const options: {id: string, label: TranslationKeys}[] = [
-  {
-    id: "bike",
-    label: "public.Forms.Labels.Bike",
-  },
-  {
-    id: "motorcycle",
-    label: "public.Forms.Labels.Motorcycle",
-  },
-  {
-    id: "boat",
-    label: "public.Forms.Labels.Boat",
-  },
-  {
-    id: "pet",
-    label: "public.Forms.Labels.Pet",
-  },
-] as const
+import {BOOKING_OPTIONS, EMPTY_STRING} from "@/assets/consts.ts";
+import {useBooking} from "@/pages/booking/BookingContext.tsx";
+import {bookingformSchema, type BookingFormValues, initialBookingFormValues} from "@/assets/types.ts";
+import {useNavigate} from "react-router";
 
 export const Booking: FunctionComponent = () => {
   const { t } = useTranslation();
-  const formSchema = createBookingSchema();
-  type FormValues = z.infer<typeof formSchema>;
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      dateRange: undefined,
-      rooms: {
-        singleBedRooms: 0,
-        doubleBedRooms: "none",
-        apartmentGuests: 0,
-      },
-      extras: [],
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      message: "",
-    },
-  })
+  const navigate = useNavigate();
+  const { bookingFormValues, updateBookingFormValues, resetBookingFormValues } = useBooking();
+  
+  const form = useForm<BookingFormValues>({
+    resolver: zodResolver(bookingformSchema),
+    defaultValues: initialBookingFormValues,
+    values: bookingFormValues
+  });
   
   const fieldRefs = useRef<Record<string, HTMLElement | null>>({});
+  
+  const onReset = () => {
+    const resetValues = {
+      ...initialBookingFormValues,
+      extras: { ...initialBookingFormValues.extras },
+      dateRange: initialBookingFormValues.dateRange ? { ...initialBookingFormValues.dateRange } : undefined,
+    };
+    
+    form.reset(resetValues, { keepDefaultValues: false });
+    resetBookingFormValues();
+  };
   
   const onError = (errors: typeof form.formState.errors) => {
     const firstErrorKey = Object.keys(errors)[0];
@@ -75,10 +57,10 @@ export const Booking: FunctionComponent = () => {
     }
   }
   
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = (values: BookingFormValues) => {
     // TODO: Send Mail with Cloudflare Worker & Resend
-    console.log(values);
-    form.reset();
+    updateBookingFormValues(values);
+    navigate('/booking/review');
   }
   
   return (
@@ -102,10 +84,8 @@ export const Booking: FunctionComponent = () => {
                       mode="range"
                       showOutsideDays={false}
                       numberOfMonths={2}
-                      selected={field.value || {}}
-                      onSelect={(value) => {
-                        field.onChange(value ? value : form.formState.defaultValues?.dateRange);
-                      }}
+                      selected={field.value ?? undefined}
+                      onSelect={(value) => field.onChange(value ? { ...value } : undefined)}
                       disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                     />
                     </div>
@@ -125,9 +105,10 @@ export const Booking: FunctionComponent = () => {
                 <FormItem className="col-span-2 w-full mb-5">
                   <FormLabel>{t('public.Rooms.General.SingleBedroom', {count: 2})}</FormLabel>
                   <Select onValueChange={(e) => {
-                    field.onChange(Number(e));
+                    if (e === EMPTY_STRING) return;
+                    field.onChange(e);
                     form.trigger(["rooms"]);
-                  }} value={field.value?.toString()}>
+                  }} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-full" ref={(element) => {
                         field.ref(element);
@@ -153,6 +134,7 @@ export const Booking: FunctionComponent = () => {
                 <FormItem className="col-span-2 w-full mb-5">
                   <FormLabel>{t('public.Rooms.General.DoubleBedroom', {count: 2})}</FormLabel>
                   <Select onValueChange={(e) => {
+                    if (e === EMPTY_STRING) return;
                     field.onChange(e);
                     form.trigger(["rooms"]);
                   }} value={field.value}>
@@ -177,9 +159,10 @@ export const Booking: FunctionComponent = () => {
                 <FormItem className="col-span-2 w-full mb-5">
                   <FormLabel>{t('public.General.Apartment')}</FormLabel>
                   <Select onValueChange={(e) => {
-                    field.onChange(Number(e));
+                    if (e === EMPTY_STRING) return;
+                    field.onChange(e);
                     form.trigger(["rooms"]);
-                  }} value={field.value?.toString()}>
+                  }} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue />
@@ -196,37 +179,28 @@ export const Booking: FunctionComponent = () => {
               )}
             />
             <h3 className="text-xl font-semibold mb-4">{t('public.Booking.Headings.AdditionalDetails')}</h3>
-            {options.map((option) => (
-              <FormField
-                key={option.id}
-                control={form.control}
-                name="extras"
-                render={({ field }) => (
-                  <FormItem
-                    key={option.id}
-                    className="col-span-2 flex flex-row items-center gap-3 my-1"
-                  >
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value?.includes(option.id)}
-                        onCheckedChange={(checked) => {
-                          return checked
-                            ? field.onChange([...field.value, option.id])
-                            : field.onChange(
-                              field.value?.filter(
-                                (value) => value !== option.id
-                              )
-                            )
-                        }}
-                      />
-                    </FormControl>
-                    <FormLabel className="text-sm font-normal">
-                      {t(option.label)}
-                    </FormLabel>
-                  </FormItem>
-                )}
-                 />
-            ))}
+            <FormField
+              control={form.control}
+              name="extras"
+              render={({ field }) => (
+                <>
+                  {BOOKING_OPTIONS.map((option) => (
+                    <FormItem key={option.id} className="col-span-2 flex items-center gap-3 my-1">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value[option.id] ?? false}
+                          onCheckedChange={(checked) =>
+                            field.onChange({ ...field.value, [option.id]: checked }) // new object
+                          }
+                        />
+                      
+                      </FormControl>
+                      <FormLabel className="text-sm font-normal">{t(option.label)}</FormLabel>
+                    </FormItem>
+                  ))}
+                </>
+              )}
+            />
             <h3 className="col-span-2 text-xl font-semibold mt-8 mb-4">{t('public.Booking.Headings.ContactDetails')}</h3>
             <FormField
               control={form.control}
@@ -306,8 +280,8 @@ export const Booking: FunctionComponent = () => {
               )}
             />
             <div className="flex gap-2 col-span-2 justify-end">
-              <Button type="reset" onClick={() => form.reset()} variant="outline">{t('public.Buttons.Clear')}</Button>
-              <Button type="submit">{t('public.Buttons.Submit')}</Button>
+              <Button type="reset" onClick={onReset} variant="outline">{t('public.Buttons.Clear')}</Button>
+              <Button type="submit">{t('public.Buttons.Review')}</Button>
             </div>
           </form>
         </Form>

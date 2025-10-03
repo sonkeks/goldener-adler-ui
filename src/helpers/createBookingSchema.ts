@@ -1,4 +1,5 @@
 import { z } from "zod";
+import {BOOKING_OPTIONS} from "@/assets/consts.ts";
 
 export const createBookingSchema = () => {
   const today = new Date();
@@ -12,9 +13,21 @@ export const createBookingSchema = () => {
     from: z.date({ message: 'public.Forms.Errors.Date.CheckInRequired'})
       .min(today, { message: 'public.Forms.Errors.Date.CheckInPast'}),
     to: z.date({ message: 'public.Forms.Errors.Date.CheckOutRequired'})
-      .min(tomorrow, { message: 'public.Forms.Errors.Date.CheckOutPast'}),
-  }, { message: 'public.Forms.Errors.Date.Missing'}).superRefine((data, ctx) => {
-    if (data.from > data.to) {
+      .min(tomorrow, { message: 'public.Forms.Errors.Date.CheckOutPast'}).optional(),
+  }, { message: 'public.Forms.Errors.Date.Missing'}).optional().superRefine((data, ctx) => {
+    if (!data || !data.from) {
+      ctx.addIssue({
+        code: "custom",
+        message: 'public.Forms.Errors.Date.CheckInRequired',
+        path: []
+      });
+    } else if (!data.to) {
+      ctx.addIssue({
+        code: "custom",
+        message: 'public.Forms.Errors.Date.CheckOutRequired',
+        path: []
+      });
+    } else if (data.from > data.to) {
       ctx.addIssue({
         code: "custom",
         message: 'public.Forms.Errors.Date.Order',
@@ -31,15 +44,15 @@ export const createBookingSchema = () => {
   
   const roomsSchema = z
     .object({
-      singleBedRooms: z.number().max(3).optional(),
-      doubleBedRooms: z.string().optional(),
-      apartmentGuests: z.number().max(3).optional(),
+      singleBedRooms: z.string().max(3),
+      doubleBedRooms: z.string(),
+      apartmentGuests: z.string().max(3),
     })
     .superRefine((data, ctx) => {
       const valid =
-        (data.singleBedRooms && data.singleBedRooms > 0) ||
+        (data.singleBedRooms && Number(data.singleBedRooms) > 0) ||
         (data.doubleBedRooms && data.doubleBedRooms !== "none") ||
-        (data.apartmentGuests && data.apartmentGuests > 0);
+        (data.apartmentGuests && Number(data.apartmentGuests) > 0);
       
       if (!valid) {
         ctx.addIssue({
@@ -50,6 +63,12 @@ export const createBookingSchema = () => {
       }
     });
   
+  const extrasShape = Object.fromEntries(
+    BOOKING_OPTIONS.map(opt => [opt.id, z.boolean()])
+  );
+  
+  const extrasSchema = z.object(extrasShape);
+  
   return z.object({
     dateRange: dateRangeSchema,
     firstName: z.string()
@@ -57,7 +76,7 @@ export const createBookingSchema = () => {
     lastName: z.string()
       .min(1, { message: 'public.Forms.Errors.Required.LastName' }),
     rooms: roomsSchema,
-    extras: z.array(z.string()),
+    extras: extrasSchema,
     email: z.email({ error: 'public.Forms.Errors.Required.Email'}),
     phone: z.string()
       .regex(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, 'public.Forms.Errors.Required.Phone')

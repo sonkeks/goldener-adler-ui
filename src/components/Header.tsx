@@ -3,6 +3,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {useLocation, useNavigate} from "react-router";
 import {useTranslation} from "react-i18next";
 import {LanguageSelect} from "@/components/ui/LanguageSelect.tsx";
+import {TRANSPARENT_ROUTES} from "@/assets/consts.ts";
 
 type MenuItem = {
   label: string,
@@ -10,7 +11,7 @@ type MenuItem = {
 }
 
 export const Header: FunctionComponent = () => {
-  const [isTop, setIsTop] = useState(true);
+  const [isTransparent, setIsTransparent] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
@@ -35,12 +36,18 @@ export const Header: FunctionComponent = () => {
   ]
   
   useEffect(() => {
-    if (location.pathname === "/booking"){
-      setIsTop(false);
+    const isTransparentRoute = TRANSPARENT_ROUTES.some(route => {
+      if (route === "/") {
+        return location.pathname === route;
+      }
+      return location.pathname.startsWith(route);
+    });
+    if (!isTransparentRoute){
+      setIsTransparent(false);
       return;
     }
     const handleScroll = () => {
-      setIsTop(window.scrollY === 0);
+      setIsTransparent(window.scrollY === 0);
     };
     
     window.addEventListener("scroll", handleScroll);
@@ -50,16 +57,16 @@ export const Header: FunctionComponent = () => {
   }, [location.pathname]);
   
   return (
-    <div id="header-container" className={`fixed w-full top-0 z-50 transition-colors ${isTop ? "bg-transparent" : "bg-background shadow-md"}`}>
+    <div id="header-container" className={`fixed w-full top-0 z-50 transition-colors ${isTransparent ? "bg-transparent" : "bg-background shadow-md"}`}>
       <menu className="pr-5 pl-2 py-3 max-w-6xl m-auto flex gap-3 items-center">
         {MENU_ITEMS.map((menuItem, index) => (
           <li key={index}>
-            <Button onClick={() => navigate(menuItem.path)} size="sm" className={`text-md ${isTop ? "text-background" : ""}`} variant="link">{menuItem.label}</Button>
+            <Button onClick={() => navigate(menuItem.path)} size="sm" className={`text-md ${isTransparent ? "text-background" : ""}`} variant="link">{menuItem.label}</Button>
           </li>
         ))}
         <div className="flex-1"></div>
-        <LanguageSelect isTop={isTop}></LanguageSelect>
-        <Button onClick={() => navigate('booking')} className={`text-md ${isTop ? "" : ""}`} variant={isTop ? "secondary" : "default"}>
+        <LanguageSelect isTop={isTransparent}></LanguageSelect>
+        <Button onClick={() => navigate('booking')} className={`text-md ${isTransparent ? "" : ""}`} variant={isTransparent ? "secondary" : "default"}>
           {t("public.Buttons.BookNow")}
         </Button>
       </menu>
