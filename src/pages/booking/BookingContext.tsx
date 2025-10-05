@@ -2,13 +2,15 @@ import {type BookingFormValues, initialBookingFormValues} from "@/assets/types";
 import { createContext, useContext, useState, type ReactNode, useEffect } from "react";
 import {isBookingFormValues} from "@/helpers/isBookingFormValues.ts";
 import type { DateRange } from "react-day-picker";
-
-const SESSION_STORAGE_KEY = 'bookingDetails';
+import {useNavigate} from "react-router";
+import {BOOKING_SESSION_STORAGE_KEY} from "@/assets/consts.ts";
+import {isValidBookingForm} from "@/helpers/isValidBookingForm.ts";
 
 type BookingContextType = {
   bookingFormValues: BookingFormValues;
   updateBookingFormValues: (bookingFormValues: BookingFormValues) => void;
   resetBookingFormValues: () => BookingFormValues;
+  cancelBooking: () => void;
 }
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
@@ -21,7 +23,7 @@ function reconstructDateRange(dateRange?: DateRange): DateRange | undefined {
 }
 
 function getBookingDetailsFromSessionStorage(previousState?: BookingFormValues): BookingFormValues {
-  const storedValue = sessionStorage.getItem(SESSION_STORAGE_KEY);
+  const storedValue = sessionStorage.getItem(BOOKING_SESSION_STORAGE_KEY);
   const fallBackValue = previousState ?? initialBookingFormValues;
   try {
     if (storedValue) {
@@ -34,7 +36,7 @@ function getBookingDetailsFromSessionStorage(previousState?: BookingFormValues):
     //TODO info message to user
     return fallBackValue;
   } catch {
-    sessionStorage.removeItem(SESSION_STORAGE_KEY);
+    sessionStorage.removeItem(BOOKING_SESSION_STORAGE_KEY);
     //TODO info message to user
     return fallBackValue;
   }
@@ -42,6 +44,7 @@ function getBookingDetailsFromSessionStorage(previousState?: BookingFormValues):
 
 export function BookingProvider({ children }: { children: ReactNode }) {
   const [bookingFormValues, setBookingFormValues] = useState<BookingFormValues>(() => getBookingDetailsFromSessionStorage(initialBookingFormValues));
+  const navigate = useNavigate();
   
   const updateBookingFormValues = (newBookingFormValues: BookingFormValues) => {
     try {
@@ -52,7 +55,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
         return;
       }
       
-      sessionStorage.setItem(SESSION_STORAGE_KEY, newSessionStorageValue);
+      sessionStorage.setItem(BOOKING_SESSION_STORAGE_KEY, newSessionStorageValue);
       setBookingFormValues(newBookingFormValues);
     } catch {
       console.error("Error with JSON Stringify/Parse on storing");
@@ -60,7 +63,9 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   }
   
   useEffect(() => {
-    sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(bookingFormValues));
+    if (isValidBookingForm(bookingFormValues)) {
+      sessionStorage.setItem(BOOKING_SESSION_STORAGE_KEY, JSON.stringify(bookingFormValues));
+    }
   }, [bookingFormValues]);
   
   const resetBookingFormValues = () => {
@@ -68,8 +73,13 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     return initialBookingFormValues;
   }
   
+  const cancelBooking = () => {
+    sessionStorage.removeItem(BOOKING_SESSION_STORAGE_KEY);
+    navigate("/", {replace: true});
+  }
+  
   return (
-    <BookingContext.Provider value={{ bookingFormValues: bookingFormValues, updateBookingFormValues: updateBookingFormValues, resetBookingFormValues: resetBookingFormValues }}>
+    <BookingContext.Provider value={{ bookingFormValues, updateBookingFormValues, resetBookingFormValues, cancelBooking }}>
       {children}
     </BookingContext.Provider>
   );

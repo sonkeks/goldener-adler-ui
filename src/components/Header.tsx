@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {useLocation, useNavigate} from "react-router";
 import {useTranslation} from "react-i18next";
 import {LanguageSelect} from "@/components/ui/LanguageSelect.tsx";
-import {TRANSPARENT_ROUTES} from "@/assets/consts.ts";
+import {BOOKING_SESSION_STORAGE_KEY, TRANSPARENT_ROUTES} from "@/assets/consts.ts";
 
 type MenuItem = {
   label: string,
@@ -56,6 +56,16 @@ export const Header: FunctionComponent = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
   
+  const getBookingButton = () => {
+    const hasBookingDetails = sessionStorage.getItem(BOOKING_SESSION_STORAGE_KEY) !== null;
+    if(location.pathname.startsWith("/booking")) return;
+    return (
+      <Button onClick={() => navigate(hasBookingDetails ? '/booking/review' : '/booking')} className={`text-md ${isTransparent ? "" : ""}`} variant={isTransparent ? "secondary" : "default"}>
+        {hasBookingDetails ? t("public.Buttons.Return") : t("public.Buttons.BookNow")}
+      </Button>
+    )
+  }
+  
   return (
     <div id="header-container" className={`fixed w-full top-0 z-50 transition-colors ${isTransparent ? "bg-transparent" : "bg-background shadow-md"}`}>
       <menu className="pr-5 pl-2 py-3 max-w-6xl m-auto flex gap-3 items-center">
@@ -66,9 +76,7 @@ export const Header: FunctionComponent = () => {
         ))}
         <div className="flex-1"></div>
         <LanguageSelect isTop={isTransparent}></LanguageSelect>
-        <Button onClick={() => navigate('booking')} className={`text-md ${isTransparent ? "" : ""}`} variant={isTransparent ? "secondary" : "default"}>
-          {t("public.Buttons.BookNow")}
-        </Button>
+        {getBookingButton()}
       </menu>
     </div>
   )

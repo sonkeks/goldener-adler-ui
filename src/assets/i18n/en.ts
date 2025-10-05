@@ -91,9 +91,24 @@ const en = {
       },
       Options: {
         NoSelection: 'No Selection',
+        SingleBedroom: {
+          "1": "1 Room",
+          "2": "2 Rooms",
+          "3": "3 Rooms"
+        },
+        DoubleBedroom: {
+          "1": "1 Room (2 People)",
+          "2": "1 Room + Additional Bed",
+          "3": "2 Rooms"
+        },
+        ApartmentGuests: {
+          "1": "1 Person",
+          "2": "2 People",
+          "3": "3 People",
+        },
         Rooms_one: 'Room',
         Rooms_other: 'Rooms',
-        People_one: 'People',
+        People_one: 'Person',
         People_other: 'People',
         AdditionalBed: 'Additional Bed',
       }
@@ -149,7 +164,10 @@ const en = {
     Buttons: {
       More: "Discover More",
       BookNow: "Book Now",
+      Return: "Return to Booking",
       Clear: "Clear",
+      Cancel: "Cancel",
+      Edit: "Edit",
       Submit: "Submit",
       Review: "Review",
       Book: "Book",

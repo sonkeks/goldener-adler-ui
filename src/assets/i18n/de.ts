@@ -89,6 +89,21 @@ const de = {
       },
       Options: {
         NoSelection: 'Keine Auswahl',
+        SingleBedroom: {
+          "1": "1 Zimmer",
+          "2": "2 Zimmer",
+          "3": "3 Zimmer"
+        },
+        DoubleBedroom: {
+          "1": "1 Zimmer (2 Personen)",
+          "2": "1 Zimmer + Aufbettung",
+          "3": "2 Zimmer"
+        },
+        ApartmentGuests: {
+          "1": "1 Person",
+          "2": "2 Personen",
+          "3": "3 Personen",
+        },
         Rooms_one: 'Zimmer',
         Rooms_other: 'Zimmer',
         People_one: 'Person',
@@ -146,7 +161,10 @@ const de = {
     Buttons: {
       More: "Mehr Entdecken",
       BookNow: "Jetzt Buchen",
+      Return: "Zurück zur Buchung",
       Clear: "Zurücksetzen",
+      Cancel: "Abbrechen",
+      Edit: "Bearbeiten",
       Submit: "Senden",
       Review: "Zur Übersicht",
       Book: "Buchen",

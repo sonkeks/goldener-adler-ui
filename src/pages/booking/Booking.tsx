@@ -144,9 +144,9 @@ export const Booking: FunctionComponent = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="none">{t('public.Booking.Options.NoSelection')}</SelectItem>
+                      <SelectItem value="0">{t('public.Booking.Options.NoSelection')}</SelectItem>
                       <SelectItem value="1">{`1 ${t('public.Booking.Options.Rooms', {count: 1})} (2 ${t('public.Booking.Options.People', {count: 2})})`}</SelectItem>
-                      <SelectItem value="1+">{`1 ${t('public.Booking.Options.Rooms', {count: 1})} + ${t('public.Booking.Options.AdditionalBed')}`}</SelectItem>
+                      <SelectItem value="2">{`1 ${t('public.Booking.Options.Rooms', {count: 1})} + ${t('public.Booking.Options.AdditionalBed')}`}</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormItem>

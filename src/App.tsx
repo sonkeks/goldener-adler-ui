@@ -24,7 +24,7 @@ export const App: FunctionComponent = () => {
           <Route path="contact" element={<Contact />} />
           <Route path="torgelow" element={<Torgelow />} />
           <Route
-            path="booking/*"
+            path="/booking/*"
             element={
               <BookingProvider>
                 <Routes>

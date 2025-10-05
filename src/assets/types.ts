@@ -32,7 +32,7 @@ export const initialBookingFormValues: BookingFormValues = {
   dateRange: undefined,
   rooms: {
     singleBedRooms: "0",
-    doubleBedRooms: "none",
+    doubleBedRooms: "0",
     apartmentGuests: "0",
   },
   extras: defaultExtras,

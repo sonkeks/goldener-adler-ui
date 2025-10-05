@@ -44,14 +44,14 @@ export const createBookingSchema = () => {
   
   const roomsSchema = z
     .object({
-      singleBedRooms: z.string().max(3),
+      singleBedRooms: z.string(),
       doubleBedRooms: z.string(),
-      apartmentGuests: z.string().max(3),
+      apartmentGuests: z.string(),
     })
     .superRefine((data, ctx) => {
       const valid =
         (data.singleBedRooms && Number(data.singleBedRooms) > 0) ||
-        (data.doubleBedRooms && data.doubleBedRooms !== "none") ||
+        (data.doubleBedRooms && Number(data.doubleBedRooms) > 0) ||
         (data.apartmentGuests && Number(data.apartmentGuests) > 0);
       
       if (!valid) {

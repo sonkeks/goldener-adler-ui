@@ -1,5 +1,7 @@
 import type {BookingOption} from "@/assets/types.ts";
 
+export const BOOKING_SESSION_STORAGE_KEY = 'bookingDetails';
+
 export const DEFAULT_TITLE = "Pension Goldener Adler";
 
 export const TRANSPARENT_ROUTES = ['/', '/rooms', '/contact', '/torgelow'];
