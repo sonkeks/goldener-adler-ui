@@ -10,6 +10,7 @@ import {Page} from "@/components/layouts/Page.tsx";
 import TownLg from "/images/town-lg.jpg?url";
 import TownXs from "/images/town-xs.jpg?url";
 import DoorsLg from "/images/doors-lg.jpg?url";
+import {RoomCarousel} from "@/components/RoomCarousel.tsx";
 
 export const Home: FunctionComponent = () => {
   const {t} = useTranslation();
@@ -46,32 +47,7 @@ export const Home: FunctionComponent = () => {
         </div>
       </Content>
       <Content className="py-6 md:py-12">
-        <div style={{height: 'calc(100dvh - 50px)'}} className={`relative w-full`}>
-          <img className="w-full h-full object-cover" src="https://www.gasthof-goldener-adler.de/images/adler/zimmer.jpg" alt="torglow-overview"/>
-          <div className="absolute top-0 w-full h-full bg-gray-800 opacity-20"></div>
-          <div className="absolute top-0 w-full h-full flex flex-col gap-4 justify-center items-center">
-            <h2 className="text-4xl text-white font-semibold">
-              {t('public.Home.Headings.Rooms')}
-            </h2>
-            <p className="max-w-lg text-center text-white">
-              {t('public.Home.Information.Rooms')}
-            </p>
-            <Button onClick={() => navigate('/rooms')} variant="outline" className="text-white">
-              {t('public.Buttons.More')}
-            </Button>
-          </div>
-          <div className="absolute bottom-3 w-full flex justify-center h-9">
-            <div className="w-40 flex justify-end"><Button className="text-white" variant="link">
-              {t('public.General.Rooms')}
-            </Button></div>
-            <Separator orientation="vertical"/>
-            <div className="w-40 flex justify-start">
-              <Button className="text-white" variant="link">
-                {t('public.General.Apartment')}
-              </Button>
-            </div>
-          </div>
-        </div>
+        <RoomCarousel />
       </Content>
       <Content maxWidth="max-w-2xl" className="py-12">
         <h2 className="text-4xl font-semibold pb-5">
