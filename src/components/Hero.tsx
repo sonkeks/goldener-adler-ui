@@ -37,7 +37,7 @@ export const Hero: FunctionComponent<HeroProps> = ({children, image, imageSmall,
         />
       </div>
       <div id="overlay" className="absolute inset-0 h-full w-full bg-slate-800 opacity-40"></div>
-      <div className="relative z-10 flex items-center justify-center h-full">
+      <div className="relative z-10 flex text-center p-5 items-center justify-center h-full">
         {children}
       </div>
       {arrow && <div className="absolute z-10 bottom-3 w-full flex justify-center">

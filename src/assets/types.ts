@@ -45,3 +45,8 @@ export const initialBookingFormValues: BookingFormValues = {
 
 export const bookingformSchema = createBookingSchema();
 export type BookingFormValues = z.infer<typeof bookingformSchema>;
+
+export type MenuItem = {
+  label: string,
+  path: string,
+}

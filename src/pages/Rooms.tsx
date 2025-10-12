@@ -153,12 +153,12 @@ export const Rooms: FunctionComponent = () => {
               ))}
             </div>
           </div>
-          <img className="flex-1 max-w-xl" src="https://www.gasthof-goldener-adler.de/images/adler/zimmer.jpg" alt="" />
+          <img className="flex-1 max-w-[100dvw] lg:max-w-xl" src="https://www.gasthof-goldener-adler.de/images/adler/zimmer.jpg" alt="" />
         </section>
       </Content>
       <Content className="pt-6 pb-12">
         <section className="flex flex-col lg:flex-row gap-8 full-w items-center lg:text-right">
-          <img className="flex-1 max-w-xl" src="https://www.gasthof-goldener-adler.de/images/pension/ferienwohnung_06.JPG" alt="" />
+          <img className="flex-1 max-w-[100dvw] lg:max-w-xl" src="https://www.gasthof-goldener-adler.de/images/pension/ferienwohnung_06.JPG" alt="" />
           <div className="col-span-2 max-w-xl">
             <h2 className="text-4xl font-semibold pb-5">{t('public.Rooms.Headings.Apartment')}</h2>
             <div>

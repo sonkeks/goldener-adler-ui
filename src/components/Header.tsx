@@ -4,11 +4,8 @@ import {useLocation, useNavigate} from "react-router";
 import {useTranslation} from "react-i18next";
 import {LanguageSelect} from "@/components/ui/LanguageSelect.tsx";
 import {BOOKING_SESSION_STORAGE_KEY, TRANSPARENT_ROUTES} from "@/assets/consts.ts";
-
-type MenuItem = {
-  label: string,
-  path: string,
-}
+import type { MenuItem } from "@/assets/types";
+import { MenuDrawer } from "./MenuDrawer.tsx";
 
 export const Header: FunctionComponent = () => {
   const [isTransparent, setIsTransparent] = useState(true);
@@ -71,8 +68,11 @@ export const Header: FunctionComponent = () => {
   return (
     <div id="header-container" className={`fixed w-full top-0 z-50 transition-colors ${isTransparent ? "bg-transparent" : "bg-background shadow-md"}`}>
       <menu className="pr-5 pl-2 py-3 max-w-6xl m-auto flex gap-3 items-center">
+        <li className="sm:hidden block">
+          <MenuDrawer items={MENU_ITEMS} isTransparent={isTransparent} />
+        </li>
         {MENU_ITEMS.map((menuItem, index) => (
-          <li key={index}>
+          <li key={index} className="hidden sm:block">
             <Button onClick={() => navigate(menuItem.path)} size="sm" className={`text-md ${isTransparent ? "text-background" : ""}`} variant="link">{menuItem.label}</Button>
           </li>
         ))}
