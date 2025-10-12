@@ -1,14 +1,17 @@
 import type {FunctionComponent} from "react";
+import {Link} from "react-router";
+import {useTranslation} from "react-i18next";
 
 export const Footer: FunctionComponent = () => {
+  const {t} = useTranslation();
   return (
     <div id="footer-container" className="bg-slate-950 text-white">
       <div className="max-w-6xl w-full m-auto px-5 py-8 flex gap-5">
         <div>
-          <b>Inhaber: Henrik Rummel</b>
+          <b>{t('public.Imprint.Owner')}</b>
           <ul>
-            <li>Impressum</li>
-            <li>Rechtliche Hinweise</li>
+            <li><Link className="hover:underline" to="/imprint">{t('public.Imprint.Title')}</Link></li>
+            <li>{t('public.LegalNotice.Title')}</li>
             <li>
               <small>@Sönke Schaarschmidt</small>
             </li>
@@ -18,10 +21,8 @@ export const Footer: FunctionComponent = () => {
         <div>
           <b>Pension Goldener Adler</b>
           <p>Pasewalker Str. 32</p>
-          <p>Torgelow</p>
-          <p>Mecklenburg Vorpommern</p>
           <p>17358</p>
-          <p>Deutschland</p>
+          <p>{t('public.Home.Information.Location')}</p>
         </div>
       </div>
     </div>

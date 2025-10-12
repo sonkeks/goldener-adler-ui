@@ -10,6 +10,8 @@ export const ISO_DATE_REGEX = /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(([+-]\d\d
 
 export const EMPTY_STRING = "";
 
+export const DOMAIN = "www.example-domain.com" //TODO: Switch to Production Domain
+
 export const BOOKING_OPTIONS: BookingOption[] = [
   {
     id: "bike",

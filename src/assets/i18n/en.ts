@@ -116,6 +116,35 @@ const en = {
     Review: {
       Title: "Review",
     },
+    Imprint: {
+      Title: "Imprint",
+      Provider: "Provider",
+      Name: "Pension \"Goldener Adler\"",
+      Owner: "Owner: Henrik Rummel",
+      Court: "District Court",
+      TaxNr: "Tax Nr.",
+      Suggestions: "If you have any suggestions regarding the contents of our guesthouse, please write to us using our",
+      Copyright: {
+        Title: "Copyright",
+        Content: "All rights reserved. The entire content and structure of this website are protected by copyright. All information and data (text, graphics, animations) may not be used or reproduced in part or in any other form without our written consent."
+      },
+      ContentResponsibility: {
+        Title: "Responsible for content in accordance with TDG and §6 MDStV",
+        Content: ""
+      },
+      DataPrivacy: {
+        Title: "Privacy Policy",
+        Content: "Privacy is important to us.<1/><1/>Users are hereby informed in accordance with the Teleservices Data Protection Act (TDDSG), the Media Services State Treaty (MDStV), the Federal Data Protection Act (BDSG) and other data protection regulations, that the personal data provided during registration will be stored, processed and used in machine-readable form exclusively for the purposes specified by the user, unless consent has been given for another type of use.<1/><1/>We are entitled to collect, process, store and use users' personal data relating to their use of our services to the extent necessary to enable users to use the service. The data provided by users is collected, stored and processed for the purpose of providing the services requested by users. Furthermore, we are entitled to access this data in order to maintain the operability of the services offered. For our part, we undertake, within the framework of the TDDSG, MDStV, BDSG and other data protection regulations, to use the data of users that becomes known to us from the user relationship, subject to any consent given elsewhere, only for the fulfilment of the purposes set out in this data protection provision and to maintain data confidentiality.<1/><1/>If you have any questions or suggestions regarding data protection, please do not hesitate to contact us using our"
+      },
+      Disclaimer: {
+        Title: "Disclaimer",
+        Content: "We expressly declare that we, {{domain}}, have no influence whatsoever on the design and content of the pages linked to by us. We therefore hereby expressly distance ourselves from all content on all linked pages on {{domain}} and do not adopt their content as our own. This declaration applies to all links displayed on {{domain}} and to all content on the pages to which the links displayed by us lead."
+      },
+      ContactForm: "contact form"
+    },
+    LegalNotice: {
+      Title: "Legal Notice",
+    },
     Forms: {
       Labels: {
         CheckIn: "Check-In",

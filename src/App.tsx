@@ -12,6 +12,7 @@ import {DashboardLayout} from "@/components/layouts/DashboardLayout.tsx";
 import {Dashboard} from "@/pages/dashboard/Dashboard.tsx";
 import {BookingReview} from "@/pages/booking/BookingReview.tsx";
 import {BookingProvider} from "@/pages/booking/BookingContext.tsx";
+import {Imprint} from "@/pages/Imprint.tsx";
 
 export const App: FunctionComponent = () => {
   return (
@@ -23,6 +24,7 @@ export const App: FunctionComponent = () => {
           <Route path="rooms" element={<Rooms />} />
           <Route path="contact" element={<Contact />} />
           <Route path="torgelow" element={<Torgelow />} />
+          <Route path="imprint" element={<Imprint />} />
           <Route
             path="/booking/*"
             element={

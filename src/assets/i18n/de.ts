@@ -116,6 +116,35 @@ const de = {
     Review: {
       Title: "Übersicht",
     },
+    Imprint: {
+      Title: "Impressum",
+      Provider: "Anbieter",
+      Name: "Pension \"Goldener Adler\"",
+      Owner: "Inh. Henrik Rummel",
+      Court: "Amtsgericht",
+      TaxNr: "Steuernummer",
+      Suggestions: "Haben Sie Anregungen zu den Inhalten unserer Pension, dann schreiben Sie uns über unser",
+      Copyright: {
+        Title: "Urheberrecht",
+        Content: "Alle Rechte vorbehalten. Der gesamte Inhalt und die Struktur dieses Internetangebots sind urheberrechtlich geschützt. Alle Informationen und Daten (Texte, Grafiken, Animationen) dürfen nicht ohne unsere schriftliche Zustimmung auszugsweise oder in irgendeiner anderen Form verwendet oder reproduziert werden."
+      },
+      ContentResponsibility: {
+        Title: "Inhaltlich verantwortlich gemäß TDG und §6 MDStV",
+        Content: ""
+      },
+      DataPrivacy: {
+        Title: "Datenschutzbestimmungen",
+        Content: "Privatsphäre ist uns wichtig.<1/><1/>Nutzende werden hiermit gemäß Teledienstedatenschutzgesetz (TDDSG), Mediendienstestaatsvertrag (MDStV), Bundesdatenschutzgesetz (BDSG) sowie sonstiger datenschutzrechtlicher Bestimmungen davon unterrichtet, dass die im Rahmen der Registrierung angegebenen personenbezogenen Daten ausschließlich zu dem Zwecke maschinenlesbar gespeichert, verarbeitet und genutzt werden, zu dem Nutzende dieses angegeben haben, sofern keine Einwilligung in eine andere Nutzungsart erteilt wurde.<1/><1/>Wir sind berechtigt, die personenbezogenen Daten der Nutzenden über die Inanspruchnahme unserer Dienste zu erheben, zu verarbeiten, zu speichern und zu nutzen, soweit dies erforderlich ist, um den Nutzenden die Inanspruchnahme des Dienstes zu ermöglichen. Die von Nutzenden angegebenen Daten werden zur Inanspruchnahme der von Nutzenden angeforderten Dienste erhoben, gespeichert und verarbeitet. Ferner sind wir berechtigt, auf diese Daten zur Erhaltung der Betriebsfähigkeit für die angebotenen Dienste zuzugreifen. Wir verpflichten uns unsereseits, im Rahmen des TDDSG, MDStV, BDSG sowie der sonstigen Datenschutzbestimmungen, die ihr aus dem Nutzungsverhältnis bekannt werdenden Daten der Nutzenden, vorbehaltlich einer anderweitig erteilten Einwilligung, nur für die Erfüllung der Zwecke nach dieser Datenschutzbestimmung zu verwenden, das Datengeheimnis zu wahren.<1/><1/>Für Fragen oder Anregungen zum Thema Datenschutz nutzen Sie gerne unser"
+      },
+      Disclaimer: {
+        Title: "Disclaimer",
+        Content: "Wir erklären ausdrücklich, dass wir, {{domain}} keinerlei Einfluss auf die Gestaltung und die Inhalte der von uns verlinkten Seiten haben. Deshalb distanzieren wir uns hiermit ausdrücklich von allen Inhalten aller gelinkten Seiten auf {{domain}} und machen uns ihre Inhalte nicht zu Eigen. Diese Erklärung gilt für alle auf {{domain}} angezeigten Links und für alle Inhalte der Seiten, zu denen die von uns angezeigten Links führen."
+      },
+      ContactForm: "Kontaktformular"
+    },
+    LegalNotice: {
+      Title: "Rechtliche Hinweise",
+    },
     Forms: {
       Labels: {
         CheckIn: "Check-In",
