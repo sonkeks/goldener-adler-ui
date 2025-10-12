@@ -69,7 +69,8 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   }, [bookingFormValues]);
   
   const resetBookingFormValues = () => {
-    updateBookingFormValues(initialBookingFormValues);
+    setBookingFormValues(initialBookingFormValues);
+    sessionStorage.removeItem(BOOKING_SESSION_STORAGE_KEY);
     return initialBookingFormValues;
   }
   

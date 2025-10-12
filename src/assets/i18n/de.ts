@@ -46,8 +46,10 @@ const de = {
         PriceOverview: "Preisübersicht",
       },
       General: {
-        SingleBedroom: "Einzelzimmer",
-        DoubleBedroom: "Doppelzimmer",
+        SingleBedroom_one: "Einzelzimmer",
+        SingleBedroom_other: "Einzelzimmer",
+        DoubleBedroom_one: "Doppelzimmer",
+        DoubleBedroom_other: "Doppelzimmer",
       },
       Labels: {
         WiFi: "WLAN",
