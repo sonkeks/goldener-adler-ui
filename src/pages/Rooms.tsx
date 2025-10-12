@@ -20,6 +20,9 @@ import {useTranslation} from "react-i18next";
 import type {IconType} from "react-icons";
 import {Page} from "@/components/layouts/Page.tsx";
 
+import BikeLg from "/images/bike-lg.jpg?url";
+import BikeXs from "/images/bike-xs.jpg?url";
+
 type Amenity = {
   id: string,
   label: string,
@@ -108,7 +111,7 @@ export const Rooms: FunctionComponent = () => {
   
   return (
     <Page title={t('public.Rooms.Title')}>
-      <Hero arrow image="http://gasthof-goldener-adler.de/images/pension/ferienwohnung_06.JPG">
+      <Hero arrow image={BikeLg} imageSmall={BikeXs}>
         <h1 className="text-4xl text-center sm:text-6xl text-white font-semibold">{t('public.Rooms.Hero.Title')}</h1>
       </Hero>
       <Content className="pt-12 pb-6">
@@ -150,12 +153,12 @@ export const Rooms: FunctionComponent = () => {
               ))}
             </div>
           </div>
-          <img className="flex-1" src="https://www.gasthof-goldener-adler.de/images/adler/zimmer.jpg" alt="" />
+          <img className="flex-1 max-w-xl" src="https://www.gasthof-goldener-adler.de/images/adler/zimmer.jpg" alt="" />
         </section>
       </Content>
       <Content className="pt-6 pb-12">
         <section className="flex flex-col lg:flex-row gap-8 full-w items-center lg:text-right">
-          <img className="flex-1" src="https://www.gasthof-goldener-adler.de/images/adler/zimmer.jpg" alt="" />
+          <img className="flex-1 max-w-xl" src="https://www.gasthof-goldener-adler.de/images/pension/ferienwohnung_06.JPG" alt="" />
           <div className="col-span-2 max-w-xl">
             <h2 className="text-4xl font-semibold pb-5">{t('public.Rooms.Headings.Apartment')}</h2>
             <div>

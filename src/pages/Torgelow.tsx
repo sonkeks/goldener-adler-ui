@@ -1,11 +1,13 @@
 import type {FunctionComponent} from "react";
 import {Hero} from "@/components/Hero.tsx";
 import {Page} from "@/components/layouts/Page.tsx";
+import SeaLg from "/images/sea-lg.jpg?url";
+import SeaXs from "/images/sea-xs.jpg?url";
 
 export const Torgelow: FunctionComponent = () => {
   return (
     <Page>
-      <Hero arrow image="https://cdn.nordkurier.de/2023/06/30/996b87f1-5986-4bc6-9509-04d57fb94791.jpeg?w=2048&auto=compress%2Cformat">
+      <Hero arrow image={SeaLg} imageSmall={SeaXs}>
         <h1 className="text-white font-bold text-6xl">Entdecke Torgelow</h1>
       </Hero>
     </Page>

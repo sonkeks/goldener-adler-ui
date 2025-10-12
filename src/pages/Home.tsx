@@ -7,6 +7,9 @@ import {Button} from "@/components/ui/button.tsx";
 import {Trans, useTranslation} from "react-i18next";
 import {useNavigate} from "react-router";
 import {Page} from "@/components/layouts/Page.tsx";
+import TownLg from "/images/town-lg.jpg?url";
+import TownXs from "/images/town-xs.jpg?url";
+import DoorsLg from "/images/doors-lg.jpg?url";
 
 export const Home: FunctionComponent = () => {
   const {t} = useTranslation();
@@ -14,7 +17,7 @@ export const Home: FunctionComponent = () => {
   
   return (
     <Page>
-      <Hero arrow image="https://cdn.nordkurier.de/2023/12/06/79484910-72fd-4684-ba8e-82b426ff9d85.jpeg?w=2048&auto=compress%2Cformat">
+      <Hero arrow image={TownLg} imageSmall={TownXs}>
         <h1 className="text-6xl font-bold text-white">
           {t('public.Home.Hero.Title')}
         </h1>
@@ -120,7 +123,7 @@ export const Home: FunctionComponent = () => {
       <Content className="py-6 md:py-12 bg-orange-50">
         <div className="flex flex-col md:flex-row items-center md:space-x-10 space-y-6 md:space-y-0">
           <div className="relative justify-self-center flex-1 w-full">
-            <img className="w-full max-h-96 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Vorwerk_Torgelow_Forsthaus_Torgelow_Urmesstischblatt_3249-1844.png/640px-Vorwerk_Torgelow_Forsthaus_Torgelow_Urmesstischblatt_3249-1844.png" alt="Torgelow Früher" />
+            <img className="w-full max-h-96 object-cover" src={DoorsLg} alt="Torgelow Früher" />
           </div>
           <div className="md:h-96">
             <Separator className="hidden md:block" orientation="vertical" />

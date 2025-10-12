@@ -1,16 +1,41 @@
-import type {FunctionComponent, PropsWithChildren} from "react";
+import {type FunctionComponent, type PropsWithChildren, useEffect, useRef, useState} from "react";
 import { PiArrowDown } from 'react-icons/pi';
 
 interface HeroProps extends PropsWithChildren {
   image: string,
+  imageSmall?: string,
   height?: string,
   arrow?: boolean,
 }
 
-export const Hero: FunctionComponent<HeroProps> = ({children, image, height, arrow}: HeroProps) => {
+export const Hero: FunctionComponent<HeroProps> = ({children, image, imageSmall, height, arrow}: HeroProps) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setIsImageLoaded(true);
+    }
+  }, [image]);
+  
   return (
     <div style={{height: height ?? '100vh'}} className="relative w-full">
-      <img className="absolute inset-0 h-full w-full object-cover" src={image} alt="header image"/>
+      <div
+        className="absolute inset-0 h-full w-full"
+        style={{
+          backgroundImage: imageSmall ? `url(${imageSmall})` : undefined,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <img
+          ref={imgRef}
+          src={image}
+          alt="header image"
+          className={`h-full w-full object-cover transition-opacity duration-700 ${isImageLoaded ? "opacity-100" : "opacity-0"}`}
+          onLoad={() => setIsImageLoaded(true)}
+        />
+      </div>
       <div id="overlay" className="absolute inset-0 h-full w-full bg-slate-800 opacity-40"></div>
       <div className="relative z-10 flex items-center justify-center h-full">
         {children}

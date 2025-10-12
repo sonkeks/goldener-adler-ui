@@ -29,10 +29,12 @@ export const Header: FunctionComponent = () => {
       label: t("public.Menu.Contact"),
       path: "/contact",
     },
+    /*
     {
       label: t("public.Menu.Torgelow"),
       path: "/torgelow",
     },
+     */
   ]
   
   useEffect(() => {
