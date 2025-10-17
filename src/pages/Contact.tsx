@@ -40,9 +40,34 @@ export const Contact: FunctionComponent = () => {
     },
   })
   
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    form.reset();
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await fetch("api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: values.email,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          message: values.content
+        })
+      })
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Failed to send email:", errorData);
+        return;
+      }
+      
+      const data = await response.json();
+      console.log("Email sent successfully:", data);
+      
+      form.reset();
+    } catch (err) {
+      console.error("Error sending email:", err);
+    }
   }
   
   return (
