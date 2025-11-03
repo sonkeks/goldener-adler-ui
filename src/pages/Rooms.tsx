@@ -153,12 +153,12 @@ export const Rooms: FunctionComponent = () => {
               ))}
             </div>
           </div>
-          <img className="flex-1 max-w-[100dvw] lg:max-w-xl" src="https://www.gasthof-goldener-adler.de/images/adler/zimmer.jpg" alt="" />
+          <img className="flex-1 min-w-0 w-full max-w-[100dvw] sm:max-w-xl" src="https://www.gasthof-goldener-adler.de/images/adler/zimmer.jpg" alt="" />
         </section>
       </Content>
       <Content className="pt-6 pb-12">
         <section className="flex flex-col lg:flex-row gap-8 full-w items-center lg:text-right">
-          <img className="flex-1 max-w-[100dvw] lg:max-w-xl" src="https://www.gasthof-goldener-adler.de/images/pension/ferienwohnung_06.JPG" alt="" />
+          <img className="flex-1 min-w-0 w-full max-w-[100dvw] sm:max-w-xl" src="https://www.gasthof-goldener-adler.de/images/pension/ferienwohnung_06.JPG" alt="" />
           <div className="col-span-2 max-w-xl">
             <h2 className="text-4xl font-semibold pb-5">{t('public.Rooms.Headings.Apartment')}</h2>
             <div>
@@ -176,7 +176,8 @@ export const Rooms: FunctionComponent = () => {
           </div>
         </section>
       </Content>
-      <Content maxWidth="max-w-2xl" className="pt-6 pb-12">
+      <Content className="pt-6 pb-12">
+        <div className="m-auto flex flex-col max-w-xl">
         <h2 className="text-4xl font-semibold pb-5">{t('public.Rooms.Headings.PriceOverview')}</h2>
         <Table>
           <TableCaption>{t('public.Rooms.Information.MinRentApartment')}</TableCaption>
@@ -215,6 +216,7 @@ export const Rooms: FunctionComponent = () => {
             </TableRow>
           </TableBody>
         </Table>
+        </div>
       </Content>
       <Content className="pb-12">
         <div className="text-center flex flex-col gap-3 items-center">

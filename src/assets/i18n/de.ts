@@ -62,7 +62,7 @@ const de = {
         Bath: "Bad",
         Shower: "Dusche",
         IsolatedWindows: "Schallisolierte Fenster",
-        Kitchen: "Küchhe",
+        Kitchen: "Küche",
         AdditionalBed: "Aufbettung möglich",
         People: "Personen",
         Breakfast: "Frühstück",
