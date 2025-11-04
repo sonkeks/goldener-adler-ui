@@ -3,14 +3,12 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" },
-    { "path": "./tsconfig.worker.json" }
   ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["@cloudflare/workers-types"],
-    "lib": ["ES2022", "WebWorker"],
+    "lib": ["ES2022"],
   }
 }
