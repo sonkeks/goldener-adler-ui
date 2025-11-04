@@ -11,6 +11,7 @@ import TownLg from "/images/town-lg.jpg?url";
 import TownXs from "/images/town-xs.jpg?url";
 import DoorsLg from "/images/doors-lg.jpg?url";
 import {RoomCarousel} from "@/components/RoomCarousel.tsx";
+import {METADATA} from "@/assets/consts.ts";
 
 export const Home: FunctionComponent = () => {
   const {t} = useTranslation();
@@ -37,8 +38,8 @@ export const Home: FunctionComponent = () => {
           <Separator className="block lg:hidden" orientation="horizontal" />
           <div className="justify-self-center flex-none">
             <ul>
-              <li className="flex my-3 gap-2 items-center"><PiPhone size={24}/><a className="hover:underline" href="tel:+49 (0) 3976 202045">+49 (0) 3976 202045</a></li>
-              <li className="flex my-3 gap-2 items-center"><PiAt size={24} /><a className="hover:underline" href="mailto:henrik.rummel@gasthof-goldener-adler.de">henrik.rummel@gasthof-goldener-adler.de</a></li>
+              <li className="flex my-3 gap-2 items-center"><PiPhone size={24}/><a className="hover:underline" href={`tel:${METADATA.OWNER_PHONE}`}>{METADATA.OWNER_PHONE_DISPLAY}</a></li>
+              <li className="flex my-3 gap-2 items-center"><PiAt size={24} /><a className="hover:underline" href={`mailto:${METADATA.OWNER_MAIL}`}>{METADATA.OWNER_MAIL}</a></li>
               <li className="flex my-3 gap-2 items-center"><PiMapPin size={24} /><a className="hover:underline" target="_blank" href="https://maps.app.goo.gl/YFw9wBuvBfhBQnni7">
                 {t('public.Home.Information.Location')}
               </a></li>

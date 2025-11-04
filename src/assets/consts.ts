@@ -10,7 +10,28 @@ export const ISO_DATE_REGEX = /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(([+-]\d\d
 
 export const EMPTY_STRING = "";
 
-export const DOMAIN = "www.example-domain.com" //TODO: Switch to Production Domain
+export const HOSTING_PROVIDER = {
+  NAME: "Scaleway",
+  URL: "https://www.scaleway.com/",
+  POLICY_URL: "https://www.scaleway.com/en/privacy-policy/"
+}
+
+export const METADATA = {
+  DOMAIN: "https://pension-goldener-adler.de", //TODO: Add real domain name
+  NAME: "Pension \"Goldener Adler\"",
+  STREET: "Pasewalker Str.",
+  NR: "32",
+  POSTCODE: "17358",
+  CITY: "Torgelow",
+  OWNER: "Henrik Rummel",
+  OWNER_MAIL: "henrik.rummel@gasthof-goldener-adler.de", //TODO: Add new domain mail
+  OWNER_PHONE: "+493976202045",
+  OWNER_PHONE_DISPLAY: "+49 (0) 3976 202045",
+  TAX_NR: "084-264-05114",
+  UST_ID: "DE 364416038",
+  REGISTER_CITY: "Pasewalk",
+  REGISTER_ID: "HRB 74048"
+}
 
 export const BOOKING_OPTIONS: BookingOption[] = [
   {

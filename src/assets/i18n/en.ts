@@ -119,8 +119,7 @@ const en = {
     Imprint: {
       Title: "Imprint",
       Provider: "Provider",
-      Name: "Pension \"Goldener Adler\"",
-      Owner: "Owner: Henrik Rummel",
+      Owner: "Own.",
       Court: "District Court",
       TaxNr: "Tax Nr.",
       Suggestions: "If you have any suggestions regarding the contents of our guesthouse, please write to us using our",
@@ -138,12 +137,83 @@ const en = {
       },
       Disclaimer: {
         Title: "Disclaimer",
-        Content: "We expressly declare that we, {{domain}}, have no influence whatsoever on the design and content of the pages linked to by us. We therefore hereby expressly distance ourselves from all content on all linked pages on {{domain}} and do not adopt their content as our own. This declaration applies to all links displayed on {{domain}} and to all content on the pages to which the links displayed by us lead."
+        Content: "We expressly declare that we, \"{{domain}}\", have no influence whatsoever on the design and content of the pages linked to by us. We therefore hereby expressly distance ourselves from all content on all linked pages on \"{{domain}}\" and do not adopt their content as our own. This declaration applies to all links displayed on \"{{domain}}\" and to all content on the pages to which the links displayed by us lead."
       },
       ContactForm: "contact form"
     },
     LegalNotice: {
       Title: "Legal Notice",
+      DataProtection: {
+        Title: "Data Protection",
+        Content: "The operators of these pages take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with the statutory data protection regulations and this privacy policy.<1/><1/>When you use this website, various personal data is collected. Personal data is data with which you can be personally identified. This privacy policy explains what data we collect and what we use it for. It also explains how and for what purpose this is done. <1/><1/>We would like to point out that data transmission over the Internet (e.g., when communicating by email) can have security gaps. It is not possible to completely protect data from access by third parties.<1/><1/>The following information provides a simple overview of what happens to your personal data when you visit this website. Personal data is any data that can be used to identify you personally. For detailed information on the subject of data protection, please refer to our privacy policy listed below this text."
+      },
+      Responsible: {
+        Title: "Who is responsible for data collection on this website?",
+        Content: "Data processing on this website is carried out by the website operator: ",
+        Footer: "The responsible body is the natural or legal person who, alone or jointly with others, decides on the purposes and means of processing personal data (e.g., names, email addresses, etc.)."
+      },
+      DataCollection: {
+        Title: "How do we collect your data?",
+        Content: "Your data is collected when you provide it to us. This may include, for example, data that you enter in a contact form. Other data is collected automatically or with your consent when you visit the website by our IT systems. This is primarily technical data (e.g., Internet browser, operating system, or time of page view). This data is collected automatically as soon as you enter this website."
+      },
+      DataUsage: {
+        Title: "What do we use your data for?",
+        Content: "Some of the data is collected to ensure that the website functions correctly. Other data may be used to analyze user behavior."
+      },
+      DataStoring: {
+        Title: "How long will your data be stored?",
+        Content: "Unless a more specific storage period is specified in this privacy policy, your personal data will remain with us until the purpose for data processing no longer applies. If you assert a legitimate request for deletion or revoke your consent to data processing, your data will be deleted unless we have other legally permissible reasons for storing your personal data (e.g., tax or commercial law retention periods); in the latter case, deletion will take place once these reasons no longer apply."
+      },
+      DataRights: {
+        Title: "What rights do you have regarding your data?",
+        Content: "You have the right to receive information about the origin, recipient, and purpose of your stored personal data at any time and free of charge. You also have the right to request the correction or deletion of this data. If you have given your consent to data processing, you can revoke this consent at any time for the future. You also have the right to request the restriction of the processing of your personal data under certain circumstances. Furthermore, you have the right to lodge a complaint with the competent supervisory authority. More detailed information on the legal basis for data processing on this website can be found in the following section."
+      },
+      GeneralInfo: {
+        Title: "General information on the legal basis for data processing on this website",
+        Content: "If you have consented to data processing, we process your personal data on the basis of Art. 6 (1) lit. a GDPR or Art. 9 (2) lit. a GDPR, provided that special categories of data are processed in accordance with Art. 9 (1) GDPR. In the event of express consent to the transfer of personal data to third countries, data processing is also carried out on the basis of Art. 49 (1) (a) GDPR. If you have consented to the storage of cookies or access to information on your end device (e.g., via device fingerprinting), data processing is also carried out on the basis of Section 25 (1) TTDSG. Consent can be revoked at any time. If your data is necessary for the performance of a contract or for the implementation of pre-contractual measures, we process your data on the basis of Art. 6 (1) lit. b GDPR. Furthermore, we process your data if it is necessary to fulfill a legal obligation on the basis of Art. 6 (1) lit. c GDPR. Data processing may also be carried out on the basis of our legitimate interest pursuant to Art. 6 (1) lit. f GDPR. The relevant legal bases in each individual case are explained in the following sections of this privacy policy."
+      },
+      Withdrawal: {
+        Title: "Withdrawal of your consent to data processing",
+        Content: "Many data processing operations are only possible with your express consent. You can revoke any consent you have already given at any time. The legality of the data processing carried out until the revocation remains unaffected by the revocation.",
+      },
+      SpecialWithdrawal: {
+        Title: "Right to object to data collection in special cases and to direct marketing (Art. 21 GDPR)",
+        Content: "If data processing is based on Art. 6 (1) (e) or (f) GDPR, you have the right to object to the processing of your personal data at any time for reasons arising from your particular situation; this also applies to profiling based on these provisions. The respective legal basis on which processing is based can be found in this privacy policy. <1/><1/>If you object, we will no longer process your personal data unless we can demonstrate compelling legitimate grounds for the processing that override your interests, rights, and freedoms, or the processing serves to assert, exercise, or defend legal claims (objection pursuant to Art. 21(1) GDPR). <1/><1/>If your personal data is processed for direct marketing purposes, you have the right to object at any time to the processing of personal data concerning you for such marketing purposes; this also applies to profiling insofar as it is related to such direct marketing. <1/>If you object, your personal data will no longer be used for direct marketing purposes (objection pursuant to Art. 21 (2) GDPR)."
+      },
+      RightOfAppeal: {
+        Title: "Right to lodge a complaint with the competent supervisory authority",
+        Content: "In the event of violations of the GDPR, data subjects have the right to lodge a complaint with a supervisory authority, in particular in the Member State of their habitual residence, place of work, or place of the alleged violation. The right to lodge a complaint exists without prejudice to other administrative or judicial remedies."
+      },
+      DataPortability: {
+        Title: "Right to data portability",
+        Content: "You have the right to have data that we process automatically on the basis of your consent or in fulfillment of a contract handed over to you or to a third party in a common, machine-readable format. If you request the direct transfer of the data to another controller, this will only be done if it is technically feasible.",
+      },
+      DataCorrectness: {
+        Title: "Information, deletion, and correction",
+        Content: "Within the framework of the applicable legal provisions, you have the right to receive information free of charge at any time about your stored personal data, its origin and recipients, and the purpose of data processing, and, if applicable, a right to correct or delete this data. You can contact us at any time with any questions you may have about this or other topics related to personal data.",
+      },
+      ProcessingRestriction: {
+        Title: "Right to restriction of processing",
+        Content: "You have the right to request the restriction of the processing of your personal data. You can contact us at any time to do so. The right to restrict processing applies in the following cases:",
+        List: {
+          Item1: "If you dispute the accuracy of your personal data stored by us, we will usually need time to verify this. For the duration of the verification, you have the right to request the restriction of the processing of your personal data.",
+          Item2: "If the processing of your personal data was/is unlawful, you can request the restriction of data processing instead of deletion.",
+          Item3: "If we no longer need your personal data, but you need it to exercise, defend, or assert legal claims, you have the right to request the restriction of the processing of your personal data instead of its deletion.",
+          Item4: "If you have lodged an objection pursuant to Art. 21 (1) GDPR, a balance must be struck between your interests and ours. As long as it is not yet clear whose interests prevail, you have the right to request that the processing of your personal data be restricted."
+        },
+        Footer: "If you have restricted the processing of your personal data, this data may—apart from its storage—only be processed with your consent or for the assertion, exercise, or defense of legal claims or for the protection of the rights of another natural or legal person or for reasons of important public interest of the European Union or a Member State."
+      },
+      Cookies: {
+        Title: "Cookies",
+        Content: "Our website uses so-called “cookies.” Cookies are small data packets and do not cause any damage to your device. They are either stored temporarily for the duration of a session (session cookies) or permanently (permanent cookies) on your device. Session cookies are automatically deleted at the end of your visit. Permanent cookies remain stored on your device until you delete them yourself or your web browser automatically deletes them. <1/><1/>In some cases, cookies from third-party companies may also be stored on your device when you visit our site (third-party cookies). These enable us or you to use certain services provided by the third-party company. <1/><1/>Cookies have various functions. Many cookies are technically necessary because certain website functions would not work without them (e.g., caching booking data). Other cookies are used to evaluate user behavior or display advertising.<1/><1/> Cookies that are necessary for the electronic communication process, for the provision of certain functions requested by you (e.g., for the temporary storage of booking data) or for the optimization of the website (e.g., cookies for measuring the web audience) (necessary cookies) are stored on the basis of Art. 6 para. 1 lit. f GDPR, unless another legal basis is specified. The website operator has a legitimate interest in storing necessary cookies for the technically error-free and optimized provision of its services. If consent to the storage of cookies and comparable recognition technologies has been requested, processing is carried out exclusively on the basis of this consent (Art. 6 (1) (a) GDPR and § 25 (1) TTDSG); Consent can be revoked at any time.<1/><1/>You can set your browser so that you are informed about the setting of cookies and only allow cookies in individual cases, exclude the acceptance of cookies for certain cases or in general, and activate the automatic deletion of cookies when closing the browser. If you deactivate cookies, the functionality of this website may be limited.<1/><1/>If cookies from third-party companies or for analysis purposes are used, we will inform you separately in this privacy policy and, if necessary, ask for your consent."
+      },
+      Hosting: {
+        Title: "Hosting",
+        Content: "We host the content of our website with the following provider",
+        ProviderInfo: "When you visit our website, {{provider}} collects various log files, including your IP address. This data is collected automatically and stored temporarily to ensure the proper and secure operation of the servers. For more information on data protection at {{provider}}, please visit:",
+        ProviderFooter: "The use of {{provider}} is based on Art. 6 (1) lit. f GDPR. We have a legitimate interest in ensuring that our website is as reliable as possible. If consent has been requested, processing is carried out exclusively on the basis of Art. 6 (1) lit. a GDPR and § 25 (1) TTDSG, insofar as the consent includes the storage of cookies or access to information on the user's terminal device (e.g. for device fingerprinting) within the meaning of the TTDSG. Consent can be revoked at any time."
+      },
+      Source: "Source",
     },
     Forms: {
       Labels: {

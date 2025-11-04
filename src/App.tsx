@@ -13,6 +13,7 @@ import {Dashboard} from "@/pages/dashboard/Dashboard.tsx";
 import {BookingReview} from "@/pages/booking/BookingReview.tsx";
 import {BookingProvider} from "@/pages/booking/BookingContext.tsx";
 import {Imprint} from "@/pages/Imprint.tsx";
+import {LegalNotice} from "@/pages/LegalNotice.tsx";
 
 export const App: FunctionComponent = () => {
   return (
@@ -25,6 +26,7 @@ export const App: FunctionComponent = () => {
           <Route path="contact" element={<Contact />} />
           <Route path="torgelow" element={<Torgelow />} />
           <Route path="imprint" element={<Imprint />} />
+          <Route path="legal" element={<LegalNotice />} />
           <Route
             path="/booking/*"
             element={

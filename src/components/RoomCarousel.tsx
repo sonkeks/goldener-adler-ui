@@ -25,7 +25,7 @@ export const RoomCarousel: FunctionComponent = () => {
           src="https://www.gasthof-goldener-adler.de/images/pension/ferienwohnung_06.JPG" alt="apartment"/>
       </div>
       <div className="absolute top-0 w-full h-full bg-gray-800 opacity-20"></div>
-      <div className="absolute top-0 w-full h-full flex flex-col gap-4 justify-center items-center">
+      <div className="absolute top-0 w-full h-full p-5 flex flex-col gap-4 justify-center items-center">
         <h2 className="text-4xl text-white font-semibold">
           {t('public.Home.Headings.Rooms')}
         </h2>
