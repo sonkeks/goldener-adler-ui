@@ -14,9 +14,11 @@ import {BookingReview} from "@/pages/booking/BookingReview.tsx";
 import {BookingProvider} from "@/pages/booking/BookingContext.tsx";
 import {Imprint} from "@/pages/Imprint.tsx";
 import {LegalNotice} from "@/pages/LegalNotice.tsx";
+import {AppGuard} from "@/AppGuard.tsx";
 
 export const App: FunctionComponent = () => {
   return (
+    <AppGuard>
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
@@ -48,5 +50,6 @@ export const App: FunctionComponent = () => {
         </Route>
       </Routes>
     </BrowserRouter>
+    </AppGuard>
   )
 }

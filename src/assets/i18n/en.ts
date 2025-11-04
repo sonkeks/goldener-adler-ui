@@ -277,6 +277,15 @@ const en = {
       Contact: 'Contact',
       Torgelow: 'Torgelow',
     }
+  },
+  internal: {
+    Guard: {
+      Title: "Password Required",
+      EnterPassword: "Enter Password",
+      EnterMessage: "Enter password to access this site:",
+      Password: "Password",
+      PasswordIncorrect: "Password Incorrect",
+    }
   }
 };
 

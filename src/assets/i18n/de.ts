@@ -276,6 +276,15 @@ const de = {
       Contact: 'Kontakt',
       Torgelow: 'Torgelow',
     }
+  },
+  internal: {
+    Guard: {
+      Title: "Passwort Notwendig",
+      EnterPassword: "Passwort eingeben",
+      EnterMessage: "Für Zugriff bitte Passwort eingeben:",
+      Password: "Passwort",
+      PasswordIncorrect: "Falsches Passwort",
+    }
   }
 };
 
