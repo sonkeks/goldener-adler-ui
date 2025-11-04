@@ -111,7 +111,7 @@ export const Rooms: FunctionComponent = () => {
   
   return (
     <Page title={t('public.Rooms.Title')}>
-      <Hero arrow image={BikeLg} imageSmall={BikeXs}>
+      <Hero arrow scrollTargetId="rooms" image={BikeLg} imageSmall={BikeXs}>
         <h1 className="text-4xl text-center sm:text-6xl text-white font-semibold">{t('public.Rooms.Hero.Title')}</h1>
       </Hero>
       <Content className="pt-12 pb-6">
@@ -136,7 +136,7 @@ export const Rooms: FunctionComponent = () => {
           </div>
         </div>
       </Content>
-      <Content className="py-12">
+      <Content id="rooms" className="py-12">
         <section className="flex flex-col-reverse lg:flex-row gap-8 full-w items-center">
           <div className="col-span-2 max-w-xl">
             <h2 className="text-4xl font-semibold pb-5">{t('public.Rooms.Headings.SingleAndDouble')}</h2>

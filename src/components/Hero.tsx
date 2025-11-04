@@ -6,9 +6,10 @@ interface HeroProps extends PropsWithChildren {
   imageSmall?: string,
   height?: string,
   arrow?: boolean,
+  scrollTargetId?: string,
 }
 
-export const Hero: FunctionComponent<HeroProps> = ({children, image, imageSmall, height, arrow}: HeroProps) => {
+export const Hero: FunctionComponent<HeroProps> = ({children, image, imageSmall, height, arrow, scrollTargetId}: HeroProps) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement | null>(null);
   
@@ -17,7 +18,18 @@ export const Hero: FunctionComponent<HeroProps> = ({children, image, imageSmall,
       setIsImageLoaded(true);
     }
   }, [image]);
-  
+
+  const handleScrollDownClick = () => {
+    if (!scrollTargetId) return;
+    const target = document.getElementById(scrollTargetId);
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }
+
   return (
     <div style={{height: height ?? '100vh'}} className="relative w-full">
       <div
@@ -41,7 +53,7 @@ export const Hero: FunctionComponent<HeroProps> = ({children, image, imageSmall,
         {children}
       </div>
       {arrow && <div className="absolute z-10 bottom-3 w-full flex justify-center">
-        <button className="p-3 cursor-pointer">
+        <button className="p-3 cursor-pointer animate-bounce" onClick={handleScrollDownClick}>
           <PiArrowDown className="text-white" size={40}/>
         </button>
       </div>}

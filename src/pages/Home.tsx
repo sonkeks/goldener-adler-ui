@@ -19,12 +19,12 @@ export const Home: FunctionComponent = () => {
   
   return (
     <Page>
-      <Hero arrow image={TownLg} imageSmall={TownXs}>
+      <Hero arrow scrollTargetId="welcome" image={TownLg} imageSmall={TownXs}>
         <h1 className="text-6xl font-bold text-white">
           {t('public.Home.Hero.Title')}
         </h1>
       </Hero>
-      <Content className="mt-6 py-6 md:py-12">
+      <Content id="welcome" className="mt-6 py-6 md:py-12">
         <div className="flex flex-col lg:flex-row items-center lg:h-64 lg:space-x-10 space-y-6 lg:space-y-0">
           <div>
             <h2 className="text-4xl pb-5 font-semibold">
