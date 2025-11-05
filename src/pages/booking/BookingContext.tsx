@@ -3,8 +3,9 @@ import { createContext, useContext, useState, type ReactNode, useEffect } from "
 import {isBookingFormValues} from "@/helpers/isBookingFormValues.ts";
 import type { DateRange } from "react-day-picker";
 import {useNavigate} from "react-router";
-import {BOOKING_SESSION_STORAGE_KEY} from "@/assets/consts.ts";
+import {BOOKING_SESSION_STORAGE_KEY, COOKIE_KEY} from "@/assets/consts.ts";
 import {isValidBookingForm} from "@/helpers/isValidBookingForm.ts";
+import Cookies from "js-cookie";
 
 type BookingContextType = {
   bookingFormValues: BookingFormValues;
@@ -23,8 +24,12 @@ function reconstructDateRange(dateRange?: DateRange): DateRange | undefined {
 }
 
 function getBookingDetailsFromSessionStorage(previousState?: BookingFormValues): BookingFormValues {
-  const storedValue = sessionStorage.getItem(BOOKING_SESSION_STORAGE_KEY);
   const fallBackValue = previousState ?? initialBookingFormValues;
+  const hasConsent = Cookies.get(COOKIE_KEY) !== "none";
+  if (!hasConsent) {
+    return fallBackValue;
+  }
+  const storedValue = sessionStorage.getItem(BOOKING_SESSION_STORAGE_KEY);
   try {
     if (storedValue) {
       let parsedData = JSON.parse(storedValue);
@@ -45,6 +50,10 @@ function getBookingDetailsFromSessionStorage(previousState?: BookingFormValues):
 export function BookingProvider({ children }: { children: ReactNode }) {
   const [bookingFormValues, setBookingFormValues] = useState<BookingFormValues>(() => getBookingDetailsFromSessionStorage(initialBookingFormValues));
   const navigate = useNavigate();
+
+  const hasCookieConsent = () => {
+    return Cookies.get(COOKIE_KEY) !== "none";
+  }
   
   const updateBookingFormValues = (newBookingFormValues: BookingFormValues) => {
     try {
@@ -54,8 +63,9 @@ export function BookingProvider({ children }: { children: ReactNode }) {
         console.error("Booking Details are of wrong type");
         return;
       }
-      
-      sessionStorage.setItem(BOOKING_SESSION_STORAGE_KEY, newSessionStorageValue);
+      if(hasCookieConsent()) {
+        sessionStorage.setItem(BOOKING_SESSION_STORAGE_KEY, newSessionStorageValue);
+      }
       setBookingFormValues(newBookingFormValues);
     } catch {
       console.error("Error with JSON Stringify/Parse on storing");
@@ -63,19 +73,23 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   }
   
   useEffect(() => {
-    if (isValidBookingForm(bookingFormValues)) {
+    if (isValidBookingForm(bookingFormValues) && hasCookieConsent()) {
       sessionStorage.setItem(BOOKING_SESSION_STORAGE_KEY, JSON.stringify(bookingFormValues));
     }
   }, [bookingFormValues]);
   
   const resetBookingFormValues = () => {
     setBookingFormValues(initialBookingFormValues);
-    sessionStorage.removeItem(BOOKING_SESSION_STORAGE_KEY);
+    if (hasCookieConsent()) {
+      sessionStorage.removeItem(BOOKING_SESSION_STORAGE_KEY);
+    }
     return initialBookingFormValues;
   }
   
   const cancelBooking = () => {
-    sessionStorage.removeItem(BOOKING_SESSION_STORAGE_KEY);
+    if (hasCookieConsent()) {
+      sessionStorage.removeItem(BOOKING_SESSION_STORAGE_KEY);
+    }
     navigate("/", {replace: true});
   }
   

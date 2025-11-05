@@ -3,9 +3,10 @@ import {Button} from "@/components/ui/button.tsx";
 import {useLocation, useNavigate} from "react-router";
 import {useTranslation} from "react-i18next";
 import {LanguageSelect} from "@/components/ui/LanguageSelect.tsx";
-import {BOOKING_SESSION_STORAGE_KEY, TRANSPARENT_ROUTES} from "@/assets/consts.ts";
+import {BOOKING_SESSION_STORAGE_KEY, COOKIE_KEY, TRANSPARENT_ROUTES} from "@/assets/consts.ts";
 import type { MenuItem } from "@/assets/types";
 import { MenuDrawer } from "./MenuDrawer.tsx";
+import Cookies from "js-cookie";
 
 export const Header: FunctionComponent = () => {
   const [isTransparent, setIsTransparent] = useState(true);
@@ -56,7 +57,10 @@ export const Header: FunctionComponent = () => {
   }, [location.pathname]);
   
   const getBookingButton = () => {
-    const hasBookingDetails = sessionStorage.getItem(BOOKING_SESSION_STORAGE_KEY) !== null;
+    const hasConsent = Cookies.get(COOKIE_KEY) !== "none";
+    const hasBookingDetails = hasConsent
+      ? sessionStorage.getItem(BOOKING_SESSION_STORAGE_KEY) !== null
+      : false;
     if(location.pathname.startsWith("/booking")) return;
     return (
       <Button onClick={() => navigate(hasBookingDetails ? '/booking/review' : '/booking')} className={`text-md ${isTransparent ? "" : ""}`} variant={isTransparent ? "secondary" : "default"}>

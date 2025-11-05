@@ -1,6 +1,7 @@
 import {Outlet} from "react-router";
 import {Header} from "@/components/Header.tsx";
 import {Footer} from "@/components/Footer.tsx";
+import {CookieBanner} from "@/components/layouts/CookieBanner.tsx";
 
 function Layout() {
   return (
@@ -12,6 +13,7 @@ function Layout() {
         </div>
         <Footer />
       </div>
+      <CookieBanner />
     </>
   )
 }

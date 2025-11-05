@@ -270,6 +270,13 @@ const en = {
       Submit: "Submit",
       Review: "Review",
       Book: "Book",
+      Accept: "Accept All",
+      Decline: "Decline All",
+      Essential: "Only Essential",
+    },
+    CookieBanner: {
+      Title: "We use cookies 🍪",
+      Content: "We use cookies to enhance your browsing experience and analyze traffic. You can choose to accept or decline all cookies or only accept essential cookies."
     },
     Menu: {
       Start: 'Home',

@@ -269,6 +269,13 @@ const de = {
       Submit: "Senden",
       Review: "Zur Übersicht",
       Book: "Buchen",
+      Accept: "Alle Akzeptieren",
+      Decline: "Alle Ablehnen",
+      Essential: "Nur Notwendige",
+    },
+    CookieBanner: {
+      Title: "Wir verwenden Cookies 🍪",
+      Content: "Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern und den Datenverkehr zu analysieren. Sie können alle Cookies akzeptieren oder ablehnen oder nur notwendige Cookies akzeptieren."
     },
     Menu: {
       Start: 'Start',

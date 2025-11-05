@@ -1,0 +1,33 @@
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useCookieConsent } from "@/hooks/useCookieConsent";
+import {useTranslation} from "react-i18next";
+
+export function CookieBanner() {
+  const { isOpen, accept, decline, essential } = useCookieConsent();
+  const {t} = useTranslation();
+
+  return (
+    <AlertDialog open={isOpen}>
+      <AlertDialogContent className="max-w-md">
+        <AlertDialogHeader>
+          <AlertDialogTitle>{t('public.CookieBanner.Title')}</AlertDialogTitle>
+          <AlertDialogDescription>{t('public.CookieBanner.Content')}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick={decline}>{t('public.Buttons.Decline')}</AlertDialogCancel>
+          <AlertDialogAction className="bg-gray-200 hover:bg-gray-300 text-black" onClick={essential}>{t('public.Buttons.Essential')}</AlertDialogAction>
+          <AlertDialogAction onClick={accept}>{t('public.Buttons.Accept')}</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+}
