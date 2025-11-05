@@ -276,7 +276,8 @@ const en = {
     },
     CookieBanner: {
       Title: "We use cookies 🍪",
-      Content: "We use cookies to enhance your browsing experience and analyze traffic. You can choose to accept or decline all cookies or only accept essential cookies."
+      Content: "We use cookies to enhance your browsing experience and analyze traffic. You can choose to accept or decline all cookies or only accept essential cookies.",
+      Link: "Cookies"
     },
     Menu: {
       Start: 'Home',

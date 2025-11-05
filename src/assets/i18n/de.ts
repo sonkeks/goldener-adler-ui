@@ -275,7 +275,8 @@ const de = {
     },
     CookieBanner: {
       Title: "Wir verwenden Cookies 🍪",
-      Content: "Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern und den Datenverkehr zu analysieren. Sie können alle Cookies akzeptieren oder ablehnen oder nur notwendige Cookies akzeptieren."
+      Content: "Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern und den Datenverkehr zu analysieren. Sie können alle Cookies akzeptieren oder ablehnen oder nur notwendige Cookies akzeptieren.",
+      Link: "Cookies"
     },
     Menu: {
       Start: 'Start',

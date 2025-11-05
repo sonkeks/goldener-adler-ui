@@ -10,10 +10,17 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useCookieConsent } from "@/hooks/useCookieConsent";
 import {useTranslation} from "react-i18next";
+import type {FunctionComponent} from "react";
 
-export function CookieBanner() {
-  const { isOpen, accept, decline, essential } = useCookieConsent();
+interface CookieBannerProps {
+  handleOpen:  (openFn: () => void) => void;
+}
+
+export const CookieBanner: FunctionComponent<CookieBannerProps> = ({ handleOpen }) => {
+  const { isOpen, setIsOpen, accept, decline, essential } = useCookieConsent();
   const {t} = useTranslation();
+
+  handleOpen(() => setIsOpen(true));
 
   return (
     <AlertDialog open={isOpen}>

@@ -40,5 +40,5 @@ export function useCookieConsent() {
     setIsOpen(false);
   }
 
-  return { isOpen, accept, decline, essential };
+  return { isOpen, setIsOpen, accept, decline, essential };
 }
